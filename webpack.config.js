@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   entry: './examples/index.js',
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx', '.scss']
   },
   output: {
     path: path.resolve(__dirname, 'examples'),
@@ -12,7 +12,15 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader' },
-      { test: /\.css$/, loader: 'style-loader!css-loader' }
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          'css-loader?modules&importLoaders=1&localIdentName=[local]___[hash:base64:5]',
+          'postcss-loader',
+          'sass-loader'
+        ]
+      }
     ]
   }
 };
