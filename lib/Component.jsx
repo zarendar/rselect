@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './styles.scss';
 
 /**
  * Class represents Component component
@@ -13,7 +14,9 @@ class Component extends React.Component {
    */
   render() {
     return (
-      <div>Hello world!!!</div>
+      <div className={styles.component}>
+        <div className={styles.inside}>Hello world!!!</div>
+      </div>
     );
   }
 }

@@ -1,0 +1,9 @@
+@import 'config';
+
+.component {
+  display: flex;
+
+  .inside {
+    color: $color;
+  }
+}
