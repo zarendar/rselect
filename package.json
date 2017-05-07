@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "start": "webpack-dev-server --inline --hot --progress --colors",
-    "test": "mocha --require babel-polyfill --compilers js:babel-register"
+    "test": "mocha  --require babel-polyfill --compilers js:babel-register lib/**/*.test.js"
   },
   "repository": {
     "type": "git",
@@ -30,7 +30,9 @@
     "babel-preset-react": "^6.24.1",
     "chai": "^3.5.0",
     "css-loader": "^0.28.1",
+    "enzyme": "^2.8.2",
     "mocha": "^3.3.0",
+    "react-addons-test-utils": "^15.5.1",
     "style-loader": "^0.17.0",
     "webpack": "^2.5.1",
     "webpack-dev-server": "^2.4.5"
