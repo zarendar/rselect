@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/zarendar/rselect/issues"
   },
-  "homepage": "https://github.com/zarendar/rselect#readme"
+  "homepage": "https://github.com/zarendar/rselect#readme",
+  "devDependencies": {
+    "webpack": "^2.5.1"
+  }
 }
