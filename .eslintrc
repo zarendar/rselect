@@ -2,13 +2,10 @@
   "extends": "airbnb",
   "parser": "babel-eslint",
   "env": {
+    "browser": true,
     "mocha": true
   },
-  "plugins": [
-    "jsx-a11y"
-  ],
   "rules": {
-    "eqeqeq" : "off",
     "comma-dangle": [
       "error",
       "never"
