@@ -2525,7 +2525,7 @@ interpret@^1.0.0:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/interpret/-/interpret-1.0.3.tgz#cbc35c62eeee73f19ab7b10a801511401afc0f90"
 
-invariant@^2.2.0:
+invariant@^2.2.0, invariant@^2.2.1:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.2.tgz#9e1f56ac0acdb6bf303306f338be3b204ae60360"
   dependencies:
@@ -4183,6 +4183,12 @@ react-addons-test-utils@^15.5.1:
   dependencies:
     fbjs "^0.8.4"
     object-assign "^4.1.0"
+
+react-css-themr@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/react-css-themr/-/react-css-themr-2.0.0.tgz#c4f93b9284009d9b4565121f09eb6b2bf402c3ef"
+  dependencies:
+    invariant "^2.2.1"
 
 react-dom@^15.5.4:
   version "15.5.4"
