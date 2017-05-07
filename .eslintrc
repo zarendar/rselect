@@ -1,0 +1,41 @@
+{
+  "extends": "airbnb",
+  "env": {
+    "browser": true,
+    "mocha": true
+  },
+  "rules": {
+    "comma-dangle": [
+      "error",
+      "never"
+    ],
+    "jsx-a11y/img-has-alt": 0,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/prefer-stateless-function": 0,
+    "require-jsdoc": [
+      "error",
+      {
+        "require": {
+          "FunctionDeclaration": true,
+          "MethodDefinition": true,
+          "ClassDeclaration": true
+        }
+      }
+    ],
+    "valid-jsdoc": [
+      "error",
+      {
+        "requireReturnDescription": true,
+        "requireParamDescription": true,
+        "requireReturnType": true,
+        "prefer": {
+          "arg": "param",
+          "argument": "param",
+          "class": "constructor",
+          "return": "returns",
+          "virtual": "abstract"
+        }
+      }
+    ]
+  }
+}
