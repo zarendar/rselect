@@ -4,6 +4,7 @@
   "description": "Simple select component for React",
   "main": "lib/index.js",
   "scripts": {
+    "lint": "eslint lib/",
     "start": "webpack-dev-server --inline --hot --progress --colors",
     "test": "mocha --require babel-polyfill --compilers js:babel-register lib/**/*.test.js"
   },
@@ -21,6 +22,7 @@
   "homepage": "https://github.com/zarendar/rselect#readme",
   "devDependencies": {
     "babel-core": "^6.24.1",
+    "babel-eslint": "^7.2.3",
     "babel-loader": "^7.0.0",
     "babel-polyfill": "^6.23.0",
     "babel-preset-es2015": "^6.24.1",
@@ -28,6 +30,11 @@
     "chai": "^3.5.0",
     "css-loader": "^0.28.1",
     "enzyme": "^2.8.2",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^5.0.0",
+    "eslint-plugin-react": "^7.0.0",
     "mocha": "^3.3.0",
     "react-addons-test-utils": "^15.5.1",
     "style-loader": "^0.17.0",
