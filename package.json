@@ -1,0 +1,24 @@
+{
+  "name": "rselect",
+  "version": "1.0.0",
+  "description": "Simple select component for React",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zarendar/rselect.git"
+  },
+  "keywords": [
+    "react",
+    "select",
+    "simple"
+  ],
+  "author": "zarendar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zarendar/rselect/issues"
+  },
+  "homepage": "https://github.com/zarendar/rselect#readme"
+}
