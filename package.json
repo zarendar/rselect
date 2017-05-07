@@ -36,6 +36,7 @@
     "eslint-plugin-jsx-a11y": "^5.0.0",
     "eslint-plugin-react": "^7.0.0",
     "mocha": "^3.3.0",
+    "mock-css-modules": "^1.0.0",
     "node-sass": "^4.5.2",
     "postcss-loader": "^1.3.3",
     "postcss-scss": "^1.0.0",
@@ -48,6 +49,7 @@
   },
   "dependencies": {
     "react": "^15.5.4",
+    "react-css-themr": "^2.0.0",
     "react-dom": "^15.5.4"
   }
 }
