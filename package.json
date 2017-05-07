@@ -7,10 +7,7 @@
     "start": "webpack-dev-server --inline --hot --progress --colors",
     "test": "mocha --require babel-polyfill --compilers js:babel-register lib/**/*.test.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/zarendar/rselect.git"
-  },
+  "repository": "git+https://github.com/zarendar/rselect.git",
   "keywords": [
     "react",
     "select",
