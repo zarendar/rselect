@@ -116,11 +116,11 @@ class Rselect extends React.Component {
       props: {
         theme,
         hasError,
-        placeholder,
-        value
+        placeholder
       },
       state: {
-        isFocused
+        isFocused,
+        value
       }
     } = this;
 
