@@ -20,7 +20,10 @@ class Examples extends React.Component {
       <ul>
         <li>
           <h3>Default</h3>
-          <Select options={OPTIONS} />
+          <Select
+            options={OPTIONS}
+            value="1"
+          />
         </li>
       </ul>
     );
