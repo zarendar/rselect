@@ -11,6 +11,7 @@ $tag-bg-color: bisque;
 $tag-margin: 2px 0 2px 2px;
 
 @mixin centered {
+  width: 100%;
   display: flex;
   align-items: center;
 }

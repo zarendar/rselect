@@ -2,7 +2,6 @@
 
 .container {
   @include centered;
-  width: 100%;
   min-height: $height;
   position: relative;
   border: 1px solid $border-color--default;
@@ -19,8 +18,17 @@
 }
 
 .placeholder {
+  @include centered;
+  min-height: $height;
   padding: 0 $padding;
   color: $placeholder-color;
+  cursor: pointer;
+}
+
+.value {
+  @include centered;
+  min-height: $height;
+  padding: 0 $padding;
 }
 
 .options {
@@ -38,6 +46,7 @@
 .option {
   @include centered;
   padding: 7px $padding; // I don't like that
+  box-sizing: border-box;
   cursor: pointer;
 
   &:hover {
