@@ -1,5 +1,8 @@
 import React from 'react';
 import Select from '../lib/';
+import {
+  OPTIONS
+} from '../lib/__tests__/data.test';
 
 /**
  * Class represents Examples component
@@ -17,19 +20,7 @@ class Examples extends React.Component {
       <ul>
         <li>
           <h3>Default</h3>
-          <Select />
-        </li>
-        <li>
-          <h3>Is focused</h3>
-          <Select isFocused />
-        </li>
-        <li>
-          <h3>Has error</h3>
-          <Select hasError />
-        </li>
-        <li>
-          <h3>Set placeholder</h3>
-          <Select placeholder="Smth else" />
+          <Select options={OPTIONS} />
         </li>
       </ul>
     );

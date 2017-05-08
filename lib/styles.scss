@@ -23,6 +23,28 @@
   color: $placeholder-color;
 }
 
+.options {
+  width: inherit;
+  max-height: 215px;
+  position: absolute;
+  top: 100%;
+  left: -1px; // I don't like that
+  border: 1px solid $border-color--default;
+  background: $options-bg-color;
+  overflow-y: auto;
+  z-index: 1;
+}
+
+.option {
+  @include centered;
+  padding: 7px $padding; // I don't like that
+  cursor: pointer;
+
+  &:hover {
+    background-color: $option-bg-color;
+  }
+}
+
 .hidden {
   display: none;
 }
