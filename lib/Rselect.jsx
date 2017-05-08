@@ -66,7 +66,7 @@ class Rselect extends React.Component {
  * @prop {Object} propTypes - Properties of the component
  * @prop {Object} propTypes.theme - The styles theme
  * @prop {Boolean} propTypes.isFocused - The flag for focused state
- * @prop {Boolean} propTypes.isFocused - The flag for detecte an error
+ * @prop {Boolean} propTypes.hasError - The flag for detecte an error
  */
 
 Rselect.propTypes = {
