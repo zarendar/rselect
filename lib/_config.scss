@@ -1,1 +1,15 @@
+$height: 30px;
+$padding: 5px;
+$font-size: 14px;
+$border-color--default: grey;
+$border-color--focused: blue;
+$border-color--has-error: red;
+$placeholder-color: grey;
+$option-bg-color: bisque;
+$tag-bg-color: bisque;
+$tag-margin: 2px 0 2px 2px;
 
+@mixin centered {
+  display: flex;
+  align-items: center;
+}

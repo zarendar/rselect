@@ -1,5 +1,19 @@
 @import 'config';
 
-.rSelect {
-  display: flex;
+.container {
+  @include centered;
+  width: 100%;
+  min-height: $height;
+  position: relative;
+  border: 1px solid $border-color--default;
+  box-sizing: border-box;
+  font-size: $font-size;
+
+  &.isFocused {
+    border-color: $border-color--focused;
+  }
+
+  &.hasError {
+    border-color: $border-color--has-error
+  }
 }
