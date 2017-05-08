@@ -27,6 +27,10 @@ class Examples extends React.Component {
           <h3>Has error</h3>
           <Select hasError />
         </li>
+        <li>
+          <h3>Set placeholder</h3>
+          <Select placeholder="Smth else" />
+        </li>
       </ul>
     );
   }
