@@ -1,6 +1,8 @@
 import React from 'react';
 import cx from 'classnames';
 
+const PLACEHOLDER_DEFAULT = 'Placeholder';
+
 /**
  * Class represents Rselect component
  *
@@ -41,7 +43,8 @@ class Rselect extends React.Component {
     const {
       props: {
         theme,
-        hasError
+        hasError,
+        placeholder
       },
       state: {
         isFocused
@@ -56,7 +59,13 @@ class Rselect extends React.Component {
         })}
         onClick={this.toggleFocusState}
       >
-        Rselect
+        <div
+          className={cx(theme.placeholder, {
+            [theme.hidden]: isFocused
+          })}
+        >
+          {placeholder}
+        </div>
       </div>
     );
   }
@@ -67,14 +76,19 @@ class Rselect extends React.Component {
  * @prop {Object} propTypes.theme - The styles theme
  * @prop {Boolean} propTypes.isFocused - The flag for focused state
  * @prop {Boolean} propTypes.hasError - The flag for detecte an error
+ * @prop {String} propTypes.placeholder - The placeholder text
  */
 
 Rselect.propTypes = {
   theme: React.PropTypes.shape({
-    container: React.PropTypes.string
+    container: React.PropTypes.string,
+    isFocused: React.PropTypes.string,
+    hasError: React.PropTypes.string,
+    hidden: React.PropTypes.string
   }).isRequired,
   isFocused: React.PropTypes.bool,
-  hasError: React.PropTypes.bool
+  hasError: React.PropTypes.bool,
+  placeholder: React.PropTypes.string
 };
 
 /**
@@ -83,7 +97,8 @@ Rselect.propTypes = {
  */
 Rselect.defaultProps = {
   isFocused: false,
-  hasError: false
+  hasError: false,
+  placeholder: PLACEHOLDER_DEFAULT
 };
 
 export default Rselect;

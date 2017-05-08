@@ -17,3 +17,12 @@
     border-color: $border-color--has-error
   }
 }
+
+.placeholder {
+  padding: 0 $padding;
+  color: $placeholder-color;
+}
+
+.hidden {
+  display: none;
+}
