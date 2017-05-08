@@ -13,7 +13,7 @@ class Rselect extends React.Component {
    */
   render() {
     return (
-      <div className={this.props.theme.rSelect}>
+      <div className={this.props.theme.container}>
         Rselect
       </div>
     );
@@ -22,7 +22,7 @@ class Rselect extends React.Component {
 
 Rselect.propTypes = {
   theme: React.PropTypes.shape({
-    rSelect: React.PropTypes.string
+    container: React.PropTypes.string
   }).isRequired
 };
 
