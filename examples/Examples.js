@@ -22,7 +22,7 @@ class Examples extends React.Component {
           <h3>Default</h3>
           <Select
             options={OPTIONS}
-            value="1"
+
           />
         </li>
       </ul>
