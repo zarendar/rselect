@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import Component from '../lib';
+import ThemedRselect from '../lib';
 
 ReactDom.render(
-  <Component />,
+  <ThemedRselect />,
   document.getElementById('root')
 );
