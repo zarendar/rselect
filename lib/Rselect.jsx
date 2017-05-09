@@ -22,7 +22,8 @@ class Rselect extends React.Component {
     this.state = {
       isFocused: props.isFocused,
       query: props.value ? this.getValue(props.value) : props.query,
-      value: props.value
+      value: props.value,
+      values: props.values
     };
 
     this.setFocusState = this.setFocusState.bind(this);
@@ -208,6 +209,34 @@ class Rselect extends React.Component {
   }
 
   /**
+   * Render the tags
+   *
+   * @returns {Array} The array of options
+   */
+  renderTags() {
+    const { theme, multi } = this.props;
+    const { values } = this.state;
+
+    return (
+      <div
+        className={cx(theme.tags, {
+          [theme.hidden]: !multi || !values.length
+        })}
+      >
+        {values.map(id => (
+          <div
+            key={`tag-${id}`}
+            className={theme.tag}
+          >
+            {this.getValue(id)}
+          </div>
+        ))}
+        {/* <input type="text" class="input"> */}
+      </div>
+    );
+  }
+
+  /**
    * Render the component
    *
    * @returns {XML} Markup for the component
@@ -223,7 +252,8 @@ class Rselect extends React.Component {
       state: {
         isFocused,
         query,
-        value
+        value,
+        values
       }
     } = this;
 
@@ -238,7 +268,7 @@ class Rselect extends React.Component {
         <div
           className={cx(theme.value, {
             [theme.placeholder]: !value,
-            [theme.hidden]: autocomplete
+            [theme.hidden]: autocomplete || values.length
           })}
           onClick={this.toggleFocusState}
         >
@@ -255,6 +285,7 @@ class Rselect extends React.Component {
           onFocus={() => this.setFocusState(true)}
         />
         {this.renderOptions()}
+        {this.renderTags()}
       </div>
     );
   }
@@ -267,10 +298,12 @@ class Rselect extends React.Component {
  * @prop {Boolean} propTypes.isFocused - The flag for focused state
  * @prop {Boolean} propTypes.hasError - The flag for detecte an error
  * @prop {String} propTypes.noDataMessage - The text when data is empty
+ * @prop {Boolean} propTypes.multi - The flag for muti select
  * @prop {Array} propTypes.options - The data for options
  * @prop {String} propTypes.placeholder - The placeholder text
  * @prop {String} propTypes.query - The query for filtering
- * @prop {String} propTypes.value - The value
+ * @prop {String} propTypes.value - The value of select
+ * @prop {Array} propTypes.value - The values of select
  */
 
 Rselect.propTypes = {
@@ -283,6 +316,8 @@ Rselect.propTypes = {
     options: React.PropTypes.string,
     option: React.PropTypes.string,
     placeholder: React.PropTypes.string,
+    tag: React.PropTypes.string,
+    tags: React.PropTypes.string,
     value: React.PropTypes.string
   }).isRequired,
   autocomplete: React.PropTypes.bool,
@@ -294,8 +329,10 @@ Rselect.propTypes = {
     name: React.PropTypes.string
   })),
   placeholder: React.PropTypes.string,
+  multi: React.PropTypes.bool,
   query: React.PropTypes.string,
-  value: React.PropTypes.string
+  value: React.PropTypes.string,
+  values: React.PropTypes.arrayOf(React.PropTypes.string)
 };
 
 /**
@@ -307,10 +344,12 @@ Rselect.defaultProps = {
   isFocused: false,
   hasError: false,
   noDataMessage: NO_DATA_MESSAGE,
+  multi: false,
   options: [],
   placeholder: PLACEHOLDER_DEFAULT,
   query: '',
-  value: null
+  value: null,
+  values: []
 };
 
 export default Rselect;

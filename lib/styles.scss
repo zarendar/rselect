@@ -66,6 +66,26 @@
   }
 }
 
+.tags {
+  width: 100%;
+  min-height: $height - 2px; // I don't like that
+  display: flex;
+  flex-wrap: wrap;
+
+  .input {
+    flex: 1;
+    margin: $tag-margin;
+  }
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+  padding: 0 $padding;
+  background-color: $tag-bg-color;
+  margin: $tag-margin;
+}
+
 .hidden {
   display: none;
 }
