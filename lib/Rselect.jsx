@@ -31,6 +31,27 @@ class Rselect extends React.Component {
     this.setValue = this.setValue.bind(this);
     this.filterOptions = this.filterOptions.bind(this);
     this.toggleFocusState = this.toggleFocusState.bind(this);
+    this.subscribeOnClickOutside = this.subscribeOnClickOutside.bind(this);
+    this.unsubscribeOnClickOutside = this.unsubscribeOnClickOutside.bind(this);
+    this.clickOutside = this.clickOutside.bind(this);
+  }
+
+  /**
+  * Handler on component did mount
+  *
+  * @returns {void}
+  */
+  componentDidMount() {
+    this.subscribeOnClickOutside();
+  }
+
+  /**
+  * Handler on component will unmount
+  *
+  * @returns {void}
+  */
+  componentWillUnmount() {
+    this.unsubscribeOnClickOutside();
   }
 
   /**
@@ -85,6 +106,43 @@ class Rselect extends React.Component {
   */
   setQuery(query) {
     this.setState({ query });
+  }
+
+  /**
+  * Subscribe on click outside event
+  *
+  * @returns {void}
+  */
+  subscribeOnClickOutside() {
+    document.addEventListener('click', this.clickOutside);
+  }
+
+  /**
+  * Unsubscribe on click outside event
+  *
+  * @returns {void}
+  */
+  unsubscribeOnClickOutside() {
+    document.removeEventListener('click', this.clickOutside);
+  }
+
+  /**
+  * Click outside component
+  *
+  * @param {Object} e - Event object by click outside
+  *
+  * @returns {void}
+  */
+  clickOutside(e) {
+    let node = e.target;
+    while (node !== null) {
+      if (node === this.container) {
+        return true;
+      }
+      node = node.parentNode;
+    }
+    this.setFocusState(false);
+    return false;
   }
 
   /**
@@ -175,6 +233,7 @@ class Rselect extends React.Component {
           [theme.isFocused]: isFocused,
           [theme.hasError]: hasError
         })}
+        ref={(node) => { this.container = node; }}
       >
         <div
           className={cx(theme.placeholder, {
