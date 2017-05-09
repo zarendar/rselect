@@ -18,7 +18,7 @@ class Examples extends React.Component {
   render() {
     return (
       <ul>
-        <li>
+        {/* <li>
           <h3>Default</h3>
           <Select
             options={OPTIONS}
@@ -30,13 +30,12 @@ class Examples extends React.Component {
             options={OPTIONS}
             autocomplete
           />
-        </li>
+        </li> */}
         <li>
           <h3>Multi</h3>
           <Select
             options={OPTIONS}
             multi
-            values={['1']}
           />
         </li>
       </ul>

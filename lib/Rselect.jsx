@@ -30,11 +30,14 @@ class Rselect extends React.Component {
     this.setQuery = this.setQuery.bind(this);
     this.getValue = this.getValue.bind(this);
     this.setValue = this.setValue.bind(this);
+    this.setValues = this.setValues.bind(this);
     this.filterOptions = this.filterOptions.bind(this);
+    this.filterOptionsForMulti = this.filterOptionsForMulti.bind(this);
     this.toggleFocusState = this.toggleFocusState.bind(this);
     this.subscribeOnClickOutside = this.subscribeOnClickOutside.bind(this);
     this.unsubscribeOnClickOutside = this.unsubscribeOnClickOutside.bind(this);
     this.clickOutside = this.clickOutside.bind(this);
+    this.renderTags = this.renderTags.bind(this);
   }
 
   /**
@@ -85,6 +88,25 @@ class Rselect extends React.Component {
 
       this.toggleFocusState();
     });
+  }
+
+  /**
+  * Set values into state
+  *
+  * @param {String} value - The new value
+  *
+  * @returns {void}
+  */
+  setValues(value) {
+    let values;
+
+    if (this.state.values.includes(value)) {
+      values = this.state.values.filter(id => id !== value);
+    } else {
+      values = [...this.state.values, value];
+    }
+
+    this.setState({ values });
   }
 
   /**
@@ -169,6 +191,25 @@ class Rselect extends React.Component {
   }
 
   /**
+  * Filter options for multi
+  *
+  * @param {Array} ids - The array of identificator
+  *
+  * @returns {Array} -The filtered array of options
+  */
+  filterOptionsForMulti(ids) {
+    let options;
+    if (this.props.autocomplete) {
+      // TODO
+    } else {
+      options = this.props.options.filter(option =>
+        !ids.includes(option.id));
+    }
+
+    return options;
+  }
+
+  /**
   * Toggle isFocused state
   *
   * @returns {void}
@@ -183,9 +224,15 @@ class Rselect extends React.Component {
    * @returns {Array} The array of options
    */
   renderOptions() {
-    const { theme, noDataMessage } = this.props;
-    const { isFocused, value } = this.state;
-    const options = this.filterOptions(value);
+    const { theme, noDataMessage, multi } = this.props;
+    const { isFocused, value, values } = this.state;
+    let options;
+
+    if (multi) {
+      options = this.filterOptionsForMulti(values);
+    } else {
+      options = this.filterOptions(value);
+    }
 
     return (
       <div
@@ -198,7 +245,9 @@ class Rselect extends React.Component {
             <div
               key={option.id}
               className={theme.option}
-              onClick={() => this.setValue(option.id)}
+              onClick={() => (
+                multi ? this.setValues(option.id) : this.setValue(option.id)
+              )}
             >
               {option.name}
             </div>
@@ -222,11 +271,13 @@ class Rselect extends React.Component {
         className={cx(theme.tags, {
           [theme.hidden]: !multi || !values.length
         })}
+        onClick={this.toggleFocusState}
       >
         {values.map(id => (
           <div
             key={`tag-${id}`}
             className={theme.tag}
+            onClick={() => this.setValues(id)}
           >
             {this.getValue(id)}
           </div>

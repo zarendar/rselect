@@ -27,7 +27,7 @@
 
 .value {
   @include centered;
-  min-height: $height;
+  min-height: $height - 3px; // I don't like that
   padding: 0 $padding;
 }
 
@@ -84,6 +84,7 @@
   padding: 0 $padding;
   background-color: $tag-bg-color;
   margin: $tag-margin;
+  cursor: pointer;
 }
 
 .hidden {
