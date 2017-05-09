@@ -27,7 +27,7 @@
 
 .value {
   @include centered;
-  min-height: $height;
+  min-height: $height - 3px; // I don't like that
   padding: 0 $padding;
 }
 
@@ -64,6 +64,27 @@
   &:hover {
     background-color: $option-bg-color;
   }
+}
+
+.tags {
+  width: 100%;
+  min-height: $height - 2px; // I don't like that
+  display: flex;
+  flex-wrap: wrap;
+
+  .input {
+    flex: 1;
+    margin: $tag-margin;
+  }
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+  padding: 0 $padding;
+  background-color: $tag-bg-color;
+  margin: $tag-margin;
+  cursor: pointer;
 }
 
 .hidden {
