@@ -31,6 +31,18 @@
   padding: 0 $padding;
 }
 
+.input {
+  width: 100%;
+  min-height: $height;
+  padding: 0 $padding;
+  border: none;
+  background-color: transparent;
+
+  &:focus {
+    outline: none;
+  }
+}
+
 .options {
   width: inherit;
   max-height: 215px;
