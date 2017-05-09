@@ -22,6 +22,12 @@ class Examples extends React.Component {
           <h3>Default</h3>
           <Select
             options={OPTIONS}
+          />
+        </li>
+        <li>
+          <h3>Autocomplete</h3>
+          <Select
+            options={OPTIONS}
             autocomplete
           />
         </li>
