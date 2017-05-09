@@ -236,20 +236,13 @@ class Rselect extends React.Component {
         ref={(node) => { this.container = node; }}
       >
         <div
-          className={cx(theme.placeholder, {
-            [theme.hidden]: autocomplete || value
-          })}
-          onClick={this.toggleFocusState}
-        >
-          {placeholder}
-        </div>
-        <div
           className={cx(theme.value, {
-            [theme.hidden]: autocomplete || !value
+            [theme.placeholder]: !value,
+            [theme.hidden]: autocomplete
           })}
           onClick={this.toggleFocusState}
         >
-          {this.getValue()}
+          {value ? this.getValue() : placeholder}
         </div>
         <input
           type="text"
