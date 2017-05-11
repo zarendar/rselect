@@ -365,7 +365,7 @@ class Rselect extends React.Component {
    */
   render() {
     const { theme, hasError, multi } = this.props;
-    const { isFocused } = this.state;
+    const { isFocused, values } = this.state;
 
     return (
       <div
@@ -379,6 +379,13 @@ class Rselect extends React.Component {
         {!multi && this.renderInput()}
         {this.renderOptions()}
         {multi && this.renderTags()}
+        <i
+          className={cx(theme.arrow, {
+            [theme.up]: isFocused,
+            [theme.hidden]: values.length
+          })}
+          onClick={this.toggleFocusState}
+        />
       </div>
     );
   }
@@ -400,6 +407,7 @@ class Rselect extends React.Component {
  */
 Rselect.propTypes = {
   theme: React.PropTypes.shape({
+    arrow: React.PropTypes.string,
     container: React.PropTypes.string,
     isFocused: React.PropTypes.string,
     hasError: React.PropTypes.string,
