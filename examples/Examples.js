@@ -45,7 +45,6 @@ class Examples extends React.Component {
             options={OPTIONS}
             multi
             autocomplete
-            direction="top"
           />
         </li>
       </ul>

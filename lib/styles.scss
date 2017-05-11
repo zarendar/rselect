@@ -2,11 +2,11 @@
 
 .container {
   @include centered;
-  min-height: $height;
   position: relative;
+  min-height: $height;
   border: 1px solid $border-color--default;
-  box-sizing: border-box;
   font-size: $font-size;
+  box-sizing: border-box;
 
   &.isFocused {
     border-color: $border-color--focused;
@@ -17,26 +17,16 @@
   }
 }
 
-.placeholder {
-  @include centered;
-  min-height: $height;
-  padding: 0 $padding;
-  color: $placeholder-color;
-  cursor: pointer;
-}
-
 .value {
   @include centered;
-  min-height: $height - 3px; // I don't like that
-  padding: 0 $padding;
+  padding: $padding;
 }
 
 .input {
   width: 100%;
-  min-height: $height - 3px; // I don't like that
-  padding: 0 $padding;
-  border: none;
+  padding: $padding;
   background-color: transparent;
+  border: none;
 
   &:focus {
     outline: none;
@@ -45,12 +35,12 @@
 
 .options {
   width: inherit;
-  max-height: 215px;
+  max-height: $options-max-height;
   position: absolute;
   top: 100%;
   left: -1px; // I don't like that
-  border: 1px solid $border-color--default;
   background: $options-bg-color;
+  border: 1px solid $border-color--default;
   overflow-y: auto;
   z-index: 1;
 
@@ -73,7 +63,6 @@
 
 .tags {
   width: 100%;
-  min-height: $height - 2px; // I don't like that
   display: flex;
   flex-wrap: wrap;
 
@@ -90,14 +79,14 @@
 .tag {
   display: flex;
   align-items: center;
+  margin: $tag-margin;
   padding: 0 $padding;
   background-color: $tag-bg-color;
-  margin: $tag-margin;
   cursor: pointer;
 }
 
 .arrow {
-  border: solid #222;
+  border: solid $arrow-color;
   border-width: 0 1px 1px 0;
   display: inline-block;
   padding: 3px;
@@ -120,14 +109,14 @@
   &::before,
   &::after {
     content: ' ';
+    width: 1px;
+    height: 12px;
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     margin: auto;
-    height: 12px;
-    width: 1px;
     background-color: $cross-color;
   }
 
