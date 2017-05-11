@@ -2,11 +2,12 @@
 
 .container {
   @include centered;
-  min-height: $height;
   position: relative;
+  min-height: $height;
+  background-color: $container-bg;
   border: 1px solid $border-color--default;
-  box-sizing: border-box;
   font-size: $font-size;
+  box-sizing: border-box;
 
   &.isFocused {
     border-color: $border-color--focused;
@@ -17,30 +18,41 @@
   }
 }
 
-.placeholder {
-  @include centered;
-  min-height: $height;
-  padding: 0 $padding;
-  color: $placeholder-color;
-  cursor: pointer;
-}
-
 .value {
   @include centered;
-  min-height: $height;
-  padding: 0 $padding;
+  padding: $padding;
+}
+
+.placeholder {
+  color: $placeholder-color;
+}
+
+.input {
+  width: 100%;
+  padding: $padding;
+  background-color: transparent;
+  border: none;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .options {
   width: inherit;
-  max-height: 215px;
+  max-height: $options-max-height;
   position: absolute;
   top: 100%;
   left: -1px; // I don't like that
-  border: 1px solid $border-color--default;
   background: $options-bg-color;
+  border: 1px solid $border-color--default;
   overflow-y: auto;
   z-index: 1;
+
+  &.top {
+    top: auto;
+    bottom: 100%;
+  }
 }
 
 .option {
@@ -51,6 +63,74 @@
 
   &:hover {
     background-color: $option-bg-color;
+  }
+}
+
+.tags {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+
+  .input {
+    min-width: 100px;
+    flex: 1;
+    margin-left: 2px;
+  }
+
+  .value {
+    flex: 1;
+  }
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+  margin: $tag-margin;
+  padding: 0 $padding;
+  background-color: $tag-bg-color;
+  cursor: pointer;
+}
+
+.arrow {
+  border: solid $arrow-color;
+  border-width: 0 1px 1px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(45deg);
+  margin: -3px 10px 0 0;
+  cursor: pointer;
+
+  &.up {
+    transform: rotate(-135deg);
+    margin: 0 10px -3px 0;
+  }
+}
+
+.cross {
+  width: 14px;
+  height: $height - 7px;
+  position: relative;
+  margin-left: 5px;
+
+  &::before,
+  &::after {
+    content: ' ';
+    width: 1px;
+    height: 12px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: $cross-color;
+  }
+
+  &:before {
+    transform: rotate(45deg);
+  }
+  &:after {
+    transform: rotate(-45deg);
   }
 }
 

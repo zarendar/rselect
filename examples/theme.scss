@@ -1,0 +1,58 @@
+@import 'config';
+
+.container {
+  background-color: $container-bg;
+  border-color: $border-color--default;
+
+  &.isFocused {
+    background-color: $container-bg--focused;
+    border-color: $border-color--focused;
+
+    .tag {
+      background-color: $tag-bg--focused;
+    }
+  }
+}
+
+.value {
+  padding: 0 10px;
+  color: $value-color;
+}
+
+.placeholder {
+  opacity: 0.5;
+}
+
+.options {
+  top: calc(100% + #{$options-space});
+  background-color: $options-bg-color;
+  border-color: $options-border-color;
+
+  &.top {
+    bottom: calc(100% + #{$options-space});
+  }
+}
+
+.option {
+  padding: 7px 10px;
+  color: $option-color;
+  &:hover {
+    background-color: $option-bg--hover;
+  }
+}
+
+.input {
+  max-height: 28px;
+  padding: 10px;
+}
+
+.tag {
+  background: $tab-bg;
+}
+
+.cross {
+  &::before,
+  &::after {
+    background-color: $cross-color;
+  }
+}
