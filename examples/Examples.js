@@ -36,6 +36,7 @@ class Examples extends React.Component {
           <Select
             options={OPTIONS}
             multi
+            values={['1']}
           />
         </li>
         <li>

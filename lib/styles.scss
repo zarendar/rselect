@@ -106,6 +106,34 @@
   }
 }
 
+.cross {
+  width: 14px;
+  height: $height - 7px;
+  position: relative;
+  margin-left: 5px;
+
+  &::before,
+  &::after {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    height: 12px;
+    width: 1px;
+    background-color: $cross-color;
+  }
+
+  &:before {
+    transform: rotate(45deg);
+  }
+  &:after {
+    transform: rotate(-45deg);
+  }
+}
+
 .hidden {
   display: none;
 }
