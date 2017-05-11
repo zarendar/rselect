@@ -1,6 +1,8 @@
 $height: 30px;
+$options-max-height: 215px;
 $padding: 5px;
 $font-size: 14px;
+$container-bg: white;
 $border-color--default: grey;
 $border-color--focused: blue;
 $border-color--has-error: red;
@@ -9,6 +11,8 @@ $options-bg-color: white;
 $option-bg-color: bisque;
 $tag-bg-color: bisque;
 $tag-margin: 2px 0 2px 2px;
+$arrow-color: #222;
+$cross-color: grey;
 
 @mixin centered {
   width: 100%;
