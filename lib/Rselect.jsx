@@ -90,6 +90,7 @@ class Rselect extends React.Component {
       }
 
       this.toggleFocusState();
+      this.props.onChange(value);
     });
   }
 
@@ -109,7 +110,7 @@ class Rselect extends React.Component {
       values = [...this.state.values, value];
     }
 
-    this.setState({ values });
+    this.setState({ values }, () => this.props.onChange(values));
   }
 
   /**
@@ -406,6 +407,7 @@ class Rselect extends React.Component {
  * @prop {String} propTypes.query - The query for filtering
  * @prop {String} propTypes.value - The value of select
  * @prop {Array} propTypes.value - The values of select
+ * @prop {Function} propTypes.onChange - The on change component handler
  */
 Rselect.propTypes = {
   theme: React.PropTypes.shape({
@@ -436,7 +438,8 @@ Rselect.propTypes = {
   multi: React.PropTypes.bool,
   query: React.PropTypes.string,
   value: React.PropTypes.string,
-  values: React.PropTypes.arrayOf(React.PropTypes.string)
+  values: React.PropTypes.arrayOf(React.PropTypes.string),
+  onChange: React.PropTypes.func.isRequired
 };
 
 /**
