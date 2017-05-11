@@ -404,7 +404,7 @@ module.exports = warning;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -787,7 +787,7 @@ module.exports = ExecutionEnvironment;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -1127,7 +1127,7 @@ module.exports = ReactComponentTreeHook;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -1159,7 +1159,7 @@ module.exports = { debugTool: debugTool };
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 function makeEmptyFunction(arg) {
@@ -1458,7 +1458,7 @@ module.exports = ReactUpdates;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -1984,7 +1984,7 @@ module.exports = DOMProperty;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -2449,7 +2449,7 @@ module.exports = ReactElement;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -3477,7 +3477,7 @@ module.exports = SyntheticUIEvent;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -4148,7 +4148,7 @@ module.exports = SyntheticMouseEvent;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -4610,7 +4610,7 @@ module.exports = setInnerHTML;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -4643,7 +4643,7 @@ module.exports = canDefineProperty;
  * of patent rights can be found in the PATENTS file in the same directory.
  *
  * @typechecks
- *
+ * 
  */
 
 /*eslint-disable no-self-compare */
@@ -5203,7 +5203,7 @@ module.exports = EventPluginUtils;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -5411,7 +5411,7 @@ module.exports = LinkedValueUtils;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -5463,7 +5463,7 @@ module.exports = ReactComponentEnvironment;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -7138,7 +7138,7 @@ module.exports = CSSProperty;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -7770,7 +7770,7 @@ module.exports = ReactEmptyComponent;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -8544,7 +8544,7 @@ module.exports = ReactMount;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -8590,7 +8590,7 @@ module.exports = ReactNodeTypes;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -8644,7 +8644,7 @@ module.exports = ViewportMetrics;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -8708,7 +8708,7 @@ module.exports = accumulateInto;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -8952,7 +8952,7 @@ module.exports = instantiateReactComponent;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -9247,7 +9247,7 @@ module.exports = traverseAllChildren;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -9531,7 +9531,7 @@ module.exports = ReactElementValidator;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -9562,7 +9562,7 @@ module.exports = ReactPropTypeLocationNames;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -9614,7 +9614,7 @@ var stylesInDom = {},
 	isOldIE = memoize(function() {
 		// Test for IE <= 9 as proposed by Browserhacks
 		// @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
-		// Tests for existence of standard globals is to allow style-loader
+		// Tests for existence of standard globals is to allow style-loader 
 		// to operate correctly into non-standard environments
 		// @see https://github.com/webpack-contrib/style-loader/issues/177
 		return window && document && document.all && !window.atob;
@@ -9780,13 +9780,13 @@ function addStyle(obj, options) {
 	// If a transform function was defined, run it on the css
 	if (options.transform && obj.css) {
 	    transformResult = options.transform(obj.css);
-
+	    
 	    if (transformResult) {
 	    	// If transform returns a value, use that instead of the original css.
 	    	// This allows running runtime transformations on the css.
 	    	obj.css = transformResult;
 	    } else {
-	    	// If the transform function returns a falsy value, don't add this css.
+	    	// If the transform function returns a falsy value, don't add this css. 
 	    	// This allows conditional loading of css
 	    	return function() {
 	    		// noop
@@ -10009,7 +10009,8 @@ var Examples = function (_React$Component) {
             'Default'
           ),
           _react2.default.createElement(_lib2.default, {
-            options: _data.OPTIONS
+            options: _data.OPTIONS,
+            onChange: function onChange() {}
           })
         ),
         _react2.default.createElement(
@@ -10022,7 +10023,8 @@ var Examples = function (_React$Component) {
           ),
           _react2.default.createElement(_lib2.default, {
             options: _data.OPTIONS,
-            autocomplete: true
+            autocomplete: true,
+            onChange: function onChange() {}
           })
         ),
         _react2.default.createElement(
@@ -10036,7 +10038,8 @@ var Examples = function (_React$Component) {
           _react2.default.createElement(_lib2.default, {
             options: _data.OPTIONS,
             multi: true,
-            values: ['1']
+            values: ['1'],
+            onChange: function onChange() {}
           })
         ),
         _react2.default.createElement(
@@ -10050,7 +10053,8 @@ var Examples = function (_React$Component) {
           _react2.default.createElement(_lib2.default, {
             options: _data.OPTIONS,
             multi: true,
-            autocomplete: true
+            autocomplete: true,
+            onChange: function onChange() {}
           })
         ),
         _react2.default.createElement(
@@ -10065,7 +10069,8 @@ var Examples = function (_React$Component) {
             theme: _theme2.default,
             options: _data.OPTIONS,
             autocomplete: true,
-            multi: true
+            multi: true,
+            onChange: function onChange() {}
           })
         )
       );
@@ -10256,6 +10261,7 @@ var Rselect = function (_React$Component) {
         }
 
         _this2.toggleFocusState();
+        _this2.props.onChange(value);
       });
     }
 
@@ -10270,6 +10276,8 @@ var Rselect = function (_React$Component) {
   }, {
     key: 'setValues',
     value: function setValues(value) {
+      var _this3 = this;
+
       var values = void 0;
 
       if (this.state.values.includes(value)) {
@@ -10280,7 +10288,9 @@ var Rselect = function (_React$Component) {
         values = [].concat(_toConsumableArray(this.state.values), [value]);
       }
 
-      this.setState({ values: values });
+      this.setState({ values: values }, function () {
+        return _this3.props.onChange(values);
+      });
     }
 
     /**
@@ -10372,11 +10382,11 @@ var Rselect = function (_React$Component) {
   }, {
     key: 'filteredByQuery',
     value: function filteredByQuery(options) {
-      var _this3 = this;
+      var _this4 = this;
 
       return options.filter(function (option) {
         var name = JSON.parse(JSON.stringify(option.name)).toLowerCase();
-        var query = JSON.parse(JSON.stringify(_this3.state.query)).toLowerCase();
+        var query = JSON.parse(JSON.stringify(_this4.state.query)).toLowerCase();
         return name.includes(query);
       });
     }
@@ -10489,7 +10499,7 @@ var Rselect = function (_React$Component) {
   }, {
     key: 'renderInput',
     value: function renderInput() {
-      var _this4 = this;
+      var _this5 = this;
 
       var _props4 = this.props,
           theme = _props4.theme,
@@ -10504,10 +10514,10 @@ var Rselect = function (_React$Component) {
         placeholder: placeholder,
         value: query,
         onChange: function onChange(e) {
-          return _this4.setQuery(e.target.value);
+          return _this5.setQuery(e.target.value);
         },
         onFocus: function onFocus() {
-          return _this4.setFocusState(true);
+          return _this5.setFocusState(true);
         }
       });
     }
@@ -10522,7 +10532,7 @@ var Rselect = function (_React$Component) {
     key: 'renderOptions',
     value: function renderOptions() {
       var _cx3,
-          _this5 = this;
+          _this6 = this;
 
       var _props5 = this.props,
           theme = _props5.theme,
@@ -10555,7 +10565,7 @@ var Rselect = function (_React$Component) {
               key: option.id,
               className: theme.option,
               onClick: function onClick() {
-                return multi ? _this5.setValues(option.id) : _this5.setValue(option.id);
+                return multi ? _this6.setValues(option.id) : _this6.setValue(option.id);
               }
             },
             option.name
@@ -10577,7 +10587,7 @@ var Rselect = function (_React$Component) {
   }, {
     key: 'renderTags',
     value: function renderTags() {
-      var _this6 = this;
+      var _this7 = this;
 
       var _props6 = this.props,
           theme = _props6.theme,
@@ -10602,10 +10612,10 @@ var Rselect = function (_React$Component) {
             _react2.default.createElement(
               'span',
               { className: theme.tagText },
-              _this6.getValue(id)
+              _this7.getValue(id)
             ),
             _react2.default.createElement('i', { className: theme.cross, onClick: function onClick() {
-                return _this6.setValues(id);
+                return _this7.setValues(id);
               } })
           );
         }),
@@ -10624,7 +10634,7 @@ var Rselect = function (_React$Component) {
     key: 'render',
     value: function render() {
       var _cx5,
-          _this7 = this,
+          _this8 = this,
           _cx6;
 
       var _props7 = this.props,
@@ -10641,7 +10651,7 @@ var Rselect = function (_React$Component) {
         {
           className: (0, _classnames2.default)(theme.container, (_cx5 = {}, _defineProperty(_cx5, theme.isFocused, isFocused), _defineProperty(_cx5, theme.hasError, hasError), _cx5)),
           ref: function ref(node) {
-            _this7.container = node;
+            _this8.container = node;
           }
         },
         !multi && this.renderValue(),
@@ -10673,6 +10683,7 @@ var Rselect = function (_React$Component) {
  * @prop {String} propTypes.query - The query for filtering
  * @prop {String} propTypes.value - The value of select
  * @prop {Array} propTypes.value - The values of select
+ * @prop {Function} propTypes.onChange - The on change component handler
  */
 
 
@@ -10705,7 +10716,8 @@ Rselect.propTypes = {
   multi: _react2.default.PropTypes.bool,
   query: _react2.default.PropTypes.string,
   value: _react2.default.PropTypes.string,
-  values: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.string)
+  values: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.string),
+  onChange: _react2.default.PropTypes.func.isRequired
 };
 
 /**
@@ -10865,7 +10877,7 @@ exports = module.exports = __webpack_require__(51)(undefined);
 
 
 // module
-exports.push([module.i, ".container___3mhiG {\n  background-color: #ecf1f8;\n  border-color: transparent; }\n  .container___3mhiG.isFocused___s84d2 {\n    background-color: #fff;\n    border-color: #3b73b3; }\n    .container___3mhiG.isFocused___s84d2 .tag___UM_W1 {\n      background-color: #ecf1f8; }\n\n.value___1aTlv {\n  padding: 0 10px;\n  color: #222; }\n\n.placeholder___1CpKG {\n  opacity: 0.5; }\n\n.options___39mlW {\n  top: calc(100% + 5px);\n  background-color: #ecf1f8;\n  border-color: transparent; }\n  .options___39mlW.top___4coc- {\n    bottom: calc(100% + 5px); }\n\n.option___1tb6z {\n  padding: 7px 10px;\n  color: #909090; }\n  .option___1tb6z:hover {\n    background-color: #cedcec; }\n\n.input___3Ljan {\n  max-height: 28px;\n  padding: 10px; }\n\n.tag___UM_W1 {\n  background: #cedcec; }\n\n.cross___3efJ_::before, .cross___3efJ_::after {\n  background-color: #909090; }\n", ""]);
+exports.push([module.i, ".container___3mhiG {\n  background-color: #ecf1f8;\n  border-color: transparent; }\n  .container___3mhiG.isFocused___s84d2 {\n    background-color: #fff;\n    border-color: #3b73b3; }\n    .container___3mhiG.isFocused___s84d2 .tag___UM_W1 {\n      background-color: #ecf1f8; }\n\n.value___1aTlv {\n  padding: 0 10px;\n  color: #222; }\n\n.placeholder___1CpKG {\n  opacity: 0.5; }\n\n.options___39mlW {\n  top: calc(100% + 5px);\n  background-color: #ecf1f8;\n  border-color: transparent; }\n  .options___39mlW.top___4coc- {\n    bottom: calc(100% + 5px); }\n\n.option___1tb6z {\n  padding: 7px 10px;\n  color: #909090; }\n  .option___1tb6z:hover {\n    background-color: #cedcec; }\n\n.input___3Ljan {\n  min-height: 28px;\n  padding: 10px; }\n\n.tag___UM_W1 {\n  background: #cedcec; }\n\n.cross___3efJ_::before, .cross___3efJ_::after {\n  background-color: #909090; }\n", ""]);
 
 // exports
 exports.locals = {
@@ -11008,7 +11020,7 @@ module.exports = camelizeStyleName;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 var isTextNode = __webpack_require__(103);
@@ -11561,7 +11573,7 @@ module.exports = isTextNode;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  * @typechecks static-only
  */
 
@@ -18008,7 +18020,7 @@ module.exports = ReactDOMUnknownPropertyHook;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -18537,7 +18549,7 @@ module.exports = {
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -18760,7 +18772,7 @@ module.exports = ReactEventListener;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -18838,7 +18850,7 @@ module.exports = ReactInjection;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -19392,7 +19404,7 @@ module.exports = ReactMultiChild;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -19492,7 +19504,7 @@ module.exports = ReactOwner;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -19707,7 +19719,7 @@ module.exports = ReactReconcileTransaction;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -19897,7 +19909,7 @@ module.exports = ReactServerRenderingTransaction;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -20564,7 +20576,7 @@ module.exports = SelectEventPlugin;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -21292,7 +21304,7 @@ module.exports = SyntheticWheelEvent;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -21585,7 +21597,7 @@ module.exports = findDOMNode;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -21774,7 +21786,7 @@ module.exports = getEventKey;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -22057,7 +22069,7 @@ module.exports = ReactMount.renderSubtreeIntoContainer;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -22121,7 +22133,7 @@ module.exports = KeyEscapeUtils;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -23364,7 +23376,7 @@ module.exports = factory(isValidElement);
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 
@@ -23545,7 +23557,7 @@ module.exports = checkReactTypeSpec;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- *
+ * 
  */
 
 

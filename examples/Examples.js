@@ -23,6 +23,7 @@ class Examples extends React.Component {
           <h3>Default</h3>
           <Select
             options={OPTIONS}
+            onChange={() => {}}
           />
         </li>
         <li>
@@ -30,6 +31,7 @@ class Examples extends React.Component {
           <Select
             options={OPTIONS}
             autocomplete
+            onChange={() => {}}
           />
         </li>
         <li>
@@ -38,6 +40,7 @@ class Examples extends React.Component {
             options={OPTIONS}
             multi
             values={['1']}
+            onChange={() => {}}
           />
         </li>
         <li>
@@ -46,6 +49,7 @@ class Examples extends React.Component {
             options={OPTIONS}
             multi
             autocomplete
+            onChange={() => {}}
           />
         </li>
         <li>
@@ -55,6 +59,7 @@ class Examples extends React.Component {
             options={OPTIONS}
             autocomplete
             multi
+            onChange={() => {}}
           />
         </li>
       </ul>
