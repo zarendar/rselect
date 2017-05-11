@@ -347,9 +347,9 @@ class Rselect extends React.Component {
             data-state={multi}
             key={`tag-${id}`}
             className={theme.tag}
-            onClick={() => this.setValues(id)}
           >
-            {this.getValue(id)}
+            <span className={theme.tagText}>{this.getValue(id)}</span>
+            <i className={theme.cross} onClick={() => this.setValues(id)} />
           </div>
         ))}
         {!autocomplete && this.renderValue()}
@@ -408,6 +408,7 @@ class Rselect extends React.Component {
 Rselect.propTypes = {
   theme: React.PropTypes.shape({
     arrow: React.PropTypes.string,
+    cross: React.PropTypes.string,
     container: React.PropTypes.string,
     isFocused: React.PropTypes.string,
     hasError: React.PropTypes.string,
