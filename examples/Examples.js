@@ -3,6 +3,7 @@ import Select from '../lib/';
 import {
   OPTIONS
 } from '../lib/__tests__/data.test';
+import theme from './theme.scss';
 
 /**
  * Class represents Examples component
@@ -45,6 +46,15 @@ class Examples extends React.Component {
             options={OPTIONS}
             multi
             autocomplete
+          />
+        </li>
+        <li>
+          <h3>Themed</h3>
+          <Select
+            theme={theme}
+            options={OPTIONS}
+            autocomplete
+            multi
           />
         </li>
       </ul>
