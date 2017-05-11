@@ -33,7 +33,7 @@
 
 .input {
   width: 100%;
-  min-height: $height;
+  min-height: $height - 3px; // I don't like that
   padding: 0 $padding;
   border: none;
   background-color: transparent;
@@ -74,7 +74,11 @@
 
   .input {
     flex: 1;
-    margin: $tag-margin;
+    margin-left: 2px;
+  }
+
+  .value {
+    flex: 1;
   }
 }
 

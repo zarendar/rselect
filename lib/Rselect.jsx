@@ -31,12 +31,15 @@ class Rselect extends React.Component {
     this.getValue = this.getValue.bind(this);
     this.setValue = this.setValue.bind(this);
     this.setValues = this.setValues.bind(this);
+    this.filteredByQuery = this.filteredByQuery.bind(this);
     this.filterOptions = this.filterOptions.bind(this);
     this.filterOptionsForMulti = this.filterOptionsForMulti.bind(this);
     this.toggleFocusState = this.toggleFocusState.bind(this);
     this.subscribeOnClickOutside = this.subscribeOnClickOutside.bind(this);
     this.unsubscribeOnClickOutside = this.unsubscribeOnClickOutside.bind(this);
     this.clickOutside = this.clickOutside.bind(this);
+    this.renderValue = this.renderValue.bind(this);
+    this.renderInput = this.renderInput.bind(this);
     this.renderTags = this.renderTags.bind(this);
   }
 
@@ -169,6 +172,21 @@ class Rselect extends React.Component {
   }
 
   /**
+  * Filter by query options
+  *
+  * @param {Array} options - The array of options
+  *
+  * @returns {Array} -The array filtered by query
+  */
+  filteredByQuery(options) {
+    return options.filter((option) => {
+      const name = JSON.parse(JSON.stringify(option.name)).toLowerCase();
+      const query = JSON.parse(JSON.stringify(this.state.query)).toLowerCase();
+      return name.includes(query);
+    });
+  }
+
+  /**
   * Filter options
   *
   * @param {String} id - The filtering identificator
@@ -176,18 +194,15 @@ class Rselect extends React.Component {
   * @returns {Array} -The filtered array of options
   */
   filterOptions(id) {
-    let options;
-    if (this.props.autocomplete) {
-      options = this.props.options.filter((option) => {
-        const name = JSON.parse(JSON.stringify(option.name)).toLowerCase();
-        const query = JSON.parse(JSON.stringify(this.state.query)).toLowerCase();
-        return name.includes(query);
-      });
+    let filteredOptions;
+    const { autocomplete, options } = this.props;
+    if (autocomplete) {
+      filteredOptions = this.filteredByQuery(options);
     } else {
-      options = this.props.options.filter(option => option.id !== id);
+      filteredOptions = options.filter(option => option.id !== id);
     }
 
-    return options;
+    return filteredOptions;
   }
 
   /**
@@ -198,15 +213,19 @@ class Rselect extends React.Component {
   * @returns {Array} -The filtered array of options
   */
   filterOptionsForMulti(ids) {
-    let options;
-    if (this.props.autocomplete) {
-      // TODO
+    let filteredOptions;
+    const { autocomplete, options } = this.props;
+    const { values } = this.state;
+
+    if (autocomplete) {
+      const filteredByQuery = this.filteredByQuery(options);
+      filteredOptions = filteredByQuery.filter(option => !values.includes(option.id));
     } else {
-      options = this.props.options.filter(option =>
+      filteredOptions = options.filter(option =>
         !ids.includes(option.id));
     }
 
-    return options;
+    return filteredOptions;
   }
 
   /**
@@ -216,6 +235,51 @@ class Rselect extends React.Component {
   */
   toggleFocusState() {
     this.setState({ isFocused: !this.state.isFocused });
+  }
+
+  /**
+   * Render the value
+   *
+   * @returns {XML} Markup for the input
+   */
+  renderValue() {
+    const { theme, autocomplete, placeholder } = this.props;
+    const { value } = this.state;
+
+    return (
+      <div
+        className={cx(theme.value, {
+          [theme.placeholder]: !value,
+          [theme.hidden]: autocomplete
+        })}
+        onClick={this.toggleFocusState}
+      >
+        {value ? this.getValue() : placeholder}
+      </div>
+    );
+  }
+
+  /**
+   * Render the input
+   *
+   * @returns {XML} Markup for the input
+   */
+  renderInput() {
+    const { theme, autocomplete, placeholder } = this.props;
+    const { query } = this.state;
+
+    return (
+      <input
+        type="text"
+        className={cx(theme.input, {
+          [theme.hidden]: !autocomplete
+        })}
+        placeholder={placeholder}
+        value={query}
+        onChange={e => this.setQuery(e.target.value)}
+        onFocus={() => this.setFocusState(true)}
+      />
+    );
   }
 
   /**
@@ -263,15 +327,14 @@ class Rselect extends React.Component {
    * @returns {Array} The array of options
    */
   renderTags() {
-    const { theme, multi } = this.props;
+    const { theme, autocomplete, multi } = this.props;
     const { values } = this.state;
 
     return (
       <div
         className={cx(theme.tags, {
-          [theme.hidden]: !multi || !values.length
+          [theme.hidden]: !multi
         })}
-        onClick={this.toggleFocusState}
       >
         {values.map(id => (
           <div
@@ -282,7 +345,8 @@ class Rselect extends React.Component {
             {this.getValue(id)}
           </div>
         ))}
-        {/* <input type="text" class="input"> */}
+        {!autocomplete && this.renderValue()}
+        {autocomplete && multi && this.renderInput()}
       </div>
     );
   }
@@ -293,20 +357,8 @@ class Rselect extends React.Component {
    * @returns {XML} Markup for the component
    */
   render() {
-    const {
-      props: {
-        theme,
-        autocomplete,
-        hasError,
-        placeholder
-      },
-      state: {
-        isFocused,
-        query,
-        value,
-        values
-      }
-    } = this;
+    const { theme, hasError, multi } = this.props;
+    const { isFocused } = this.state;
 
     return (
       <div
@@ -316,27 +368,10 @@ class Rselect extends React.Component {
         })}
         ref={(node) => { this.container = node; }}
       >
-        <div
-          className={cx(theme.value, {
-            [theme.placeholder]: !value,
-            [theme.hidden]: autocomplete || values.length
-          })}
-          onClick={this.toggleFocusState}
-        >
-          {value ? this.getValue() : placeholder}
-        </div>
-        <input
-          type="text"
-          className={cx(theme.input, {
-            [theme.hidden]: !autocomplete
-          })}
-          placeholder={placeholder}
-          value={query}
-          onChange={e => this.setQuery(e.target.value)}
-          onFocus={() => this.setFocusState(true)}
-        />
+        {!multi && this.renderValue()}
+        {!multi && this.renderInput()}
         {this.renderOptions()}
-        {this.renderTags()}
+        {multi && this.renderTags()}
       </div>
     );
   }
@@ -356,7 +391,6 @@ class Rselect extends React.Component {
  * @prop {String} propTypes.value - The value of select
  * @prop {Array} propTypes.value - The values of select
  */
-
 Rselect.propTypes = {
   theme: React.PropTypes.shape({
     container: React.PropTypes.string,
