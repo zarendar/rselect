@@ -53,6 +53,11 @@
   background: $options-bg-color;
   overflow-y: auto;
   z-index: 1;
+
+  &.top {
+    top: auto;
+    bottom: 100%;
+  }
 }
 
 .option {
