@@ -293,7 +293,7 @@ class Rselect extends React.Component {
    * @returns {Array} The array of options
    */
   renderOptions() {
-    const { theme, noDataMessage, multi } = this.props;
+    const { theme, direction, noDataMessage, multi } = this.props;
     const { isFocused, value, values } = this.state;
     let options;
 
@@ -306,7 +306,8 @@ class Rselect extends React.Component {
     return (
       <div
         className={cx(theme.options, {
-          [theme.hidden]: !isFocused
+          [theme.hidden]: !isFocused,
+          [theme.top]: direction === 'top'
         })}
       >
         {options.length
@@ -395,6 +396,7 @@ class Rselect extends React.Component {
  * @prop {Object} propTypes - Properties of the component
  * @prop {Object} propTypes.theme - The styles theme
  * @prop {Boolean} propTypes.autocomplete - The flag for autocomplete
+ * @prop {String} propTypes.direction - The options direction way
  * @prop {Boolean} propTypes.isFocused - The flag for focused state
  * @prop {Boolean} propTypes.hasError - The flag for detecte an error
  * @prop {String} propTypes.noDataMessage - The text when data is empty
@@ -422,6 +424,7 @@ Rselect.propTypes = {
     value: React.PropTypes.string
   }).isRequired,
   autocomplete: React.PropTypes.bool,
+  direction: React.PropTypes.oneOf(['top', 'bottom']),
   isFocused: React.PropTypes.bool,
   hasError: React.PropTypes.bool,
   noDataMessage: React.PropTypes.string,
@@ -442,6 +445,7 @@ Rselect.propTypes = {
  */
 Rselect.defaultProps = {
   autocomplete: false,
+  direction: 'bottom',
   isFocused: false,
   hasError: false,
   noDataMessage: NO_DATA_MESSAGE,
