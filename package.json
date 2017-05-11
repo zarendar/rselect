@@ -1,8 +1,8 @@
 {
-  "name": "rselect",
+  "name": "rselect1",
   "version": "1.0.0",
   "description": "Simple select component for React",
-  "main": "lib/index.js",
+  "main": "dist/bundle.js",
   "scripts": {
     "lint": "eslint lib/",
     "start": "webpack-dev-server --inline --hot --progress --colors",
@@ -57,6 +57,7 @@
     "classnames": "^2.2.5",
     "react": "^15.5.4",
     "react-css-themr": "^2.0.0",
-    "react-dom": "^15.5.4"
+    "react-dom": "^15.5.4",
+    "rselect": "^1.0.0"
   }
 }
