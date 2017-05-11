@@ -162,6 +162,11 @@ class Rselect extends React.Component {
   clickOutside(e) {
     let node = e.target;
     while (node !== null) {
+      if (node.hasAttribute &&
+        node.hasAttribute('data-state') && !!node.getAttribute('data-state')) {
+        return true;
+      } // TODO I don't line this
+
       if (node === this.container) {
         return true;
       }
@@ -307,6 +312,7 @@ class Rselect extends React.Component {
         {options.length
           ? options.map(option => (
             <div
+              data-state={multi}
               key={option.id}
               className={theme.option}
               onClick={() => (
@@ -338,6 +344,7 @@ class Rselect extends React.Component {
       >
         {values.map(id => (
           <div
+            data-state={multi}
             key={`tag-${id}`}
             className={theme.tag}
             onClick={() => this.setValues(id)}
