@@ -5,16 +5,16 @@ const PLACEHOLDER_DEFAULT = 'Placeholder';
 const NO_DATA_MESSAGE = 'No data';
 
 /**
- * Class represents Rselect component
+ * Class represents Select component
  *
  * @extends {React.Component}
  */
-class Rselect extends React.Component {
+class Select extends React.Component {
   /**
-   * Create new Rselect
+   * Create new Select
    *
    * @param {Object} props - The initial properties
-   * @see Rselect.propTypes
+   * @see Select.propTypes
    */
   constructor(props) {
     super(props);
@@ -23,7 +23,7 @@ class Rselect extends React.Component {
       isFocused: props.isFocused,
       query: props.value ? this.getValue(props.value) : props.query,
       value: props.value,
-      values: props.values
+      values: props.values || []
     };
 
     this.setFocusState = this.setFocusState.bind(this);
@@ -40,6 +40,7 @@ class Rselect extends React.Component {
     this.clickOutside = this.clickOutside.bind(this);
     this.renderValue = this.renderValue.bind(this);
     this.renderInput = this.renderInput.bind(this);
+    this.renderOptions = this.renderOptions.bind(this);
     this.renderTags = this.renderTags.bind(this);
   }
 
@@ -50,6 +51,20 @@ class Rselect extends React.Component {
   */
   componentDidMount() {
     this.subscribeOnClickOutside();
+  }
+
+  /**
+  * Handler on component will recieve props
+  *
+  * @param {Object} nextProps - The next properties
+  *
+  * @returns {void}
+  */
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      value: nextProps.value,
+      values: nextProps.values || []
+    });
   }
 
   /**
@@ -294,7 +309,7 @@ class Rselect extends React.Component {
    * @returns {Array} The array of options
    */
   renderOptions() {
-    const { theme, direction, noDataMessage, multi } = this.props;
+    const { theme, direction, emptyOption, noDataMessage, multi, placeholder } = this.props;
     const { isFocused, value, values } = this.state;
     let options;
 
@@ -311,6 +326,14 @@ class Rselect extends React.Component {
           [theme.top]: direction === 'top'
         })}
       >
+        {emptyOption && value && (
+          <div
+            className={cx(theme.option, theme.placeholder)}
+            onClick={() => this.setValue(null)}
+          >
+            {placeholder}
+          </div>
+        )}
         {options.length
           ? options.map(option => (
             <div
@@ -366,28 +389,34 @@ class Rselect extends React.Component {
    * @returns {XML} Markup for the component
    */
   render() {
-    const { theme, hasError, multi } = this.props;
+    const { theme, disabled, error, multi } = this.props;
     const { isFocused, values } = this.state;
 
     return (
       <div
-        className={cx(theme.container, {
-          [theme.isFocused]: isFocused,
-          [theme.hasError]: hasError
-        })}
+        className={theme.container}
         ref={(node) => { this.container = node; }}
       >
-        {!multi && this.renderValue()}
-        {!multi && this.renderInput()}
-        {this.renderOptions()}
-        {multi && this.renderTags()}
-        <i
-          className={cx(theme.arrow, {
-            [theme.up]: isFocused,
-            [theme.hidden]: values.length
+        <div
+          className={cx(theme.select, {
+            [theme.isFocused]: isFocused,
+            [theme.disabled]: disabled,
+            [theme.hasError]: error
           })}
-          onClick={this.toggleFocusState}
-        />
+        >
+          {!multi && this.renderValue()}
+          {!multi && this.renderInput()}
+          {this.renderOptions()}
+          {multi && this.renderTags()}
+          <i
+            className={cx(theme.arrow, {
+              [theme.up]: isFocused,
+              [theme.hidden]: values.length
+            })}
+            onClick={this.toggleFocusState}
+          />
+        </div>
+        {error && <div className={theme.error}>{error}</div>}
       </div>
     );
   }
@@ -398,8 +427,10 @@ class Rselect extends React.Component {
  * @prop {Object} propTypes.theme - The styles theme
  * @prop {Boolean} propTypes.autocomplete - The flag for autocomplete
  * @prop {String} propTypes.direction - The options direction way
+ * @prop {Boolean} propTypes.disabled - The flag for disabled
+ * @prop {Boolean} propTypes.emptyOption - The flag for emptyOption
  * @prop {Boolean} propTypes.isFocused - The flag for focused state
- * @prop {Boolean} propTypes.hasError - The flag for detecte an error
+ * @prop {Boolean} propTypes.error - The flag for detecte an error
  * @prop {String} propTypes.noDataMessage - The text when data is empty
  * @prop {Boolean} propTypes.multi - The flag for muti select
  * @prop {Array} propTypes.options - The data for options
@@ -409,11 +440,13 @@ class Rselect extends React.Component {
  * @prop {Array} propTypes.value - The values of select
  * @prop {Function} propTypes.onChange - The on change component handler
  */
-Rselect.propTypes = {
+Select.propTypes = {
   theme: React.PropTypes.shape({
     arrow: React.PropTypes.string,
     cross: React.PropTypes.string,
     container: React.PropTypes.string,
+    disabled: React.PropTypes.string,
+    error: React.PropTypes.string,
     isFocused: React.PropTypes.string,
     hasError: React.PropTypes.string,
     hidden: React.PropTypes.string,
@@ -427,11 +460,16 @@ Rselect.propTypes = {
   }).isRequired,
   autocomplete: React.PropTypes.bool,
   direction: React.PropTypes.oneOf(['top', 'bottom']),
+  disabled: React.PropTypes.bool,
+  emptyOption: React.PropTypes.bool,
   isFocused: React.PropTypes.bool,
-  hasError: React.PropTypes.bool,
+  error: React.PropTypes.string,
   noDataMessage: React.PropTypes.string,
   options: React.PropTypes.arrayOf(React.PropTypes.shape({
-    id: React.PropTypes.string,
+    id: React.PropTypes.oneOfType([
+      React.PropTypes.number,
+      React.PropTypes.string
+    ]),
     name: React.PropTypes.string
   })),
   placeholder: React.PropTypes.string,
@@ -444,13 +482,15 @@ Rselect.propTypes = {
 
 /**
  * @prop {Object} defaultProps - Default Properties of the component
- * @see Rselect.propTypes
+ * @see Select.propTypes
  */
-Rselect.defaultProps = {
+Select.defaultProps = {
   autocomplete: false,
   direction: 'bottom',
+  disabled: false,
+  emptyOption: false,
   isFocused: false,
-  hasError: false,
+  error: null,
   noDataMessage: NO_DATA_MESSAGE,
   multi: false,
   options: [],
@@ -460,4 +500,4 @@ Rselect.defaultProps = {
   values: []
 };
 
-export default Rselect;
+export default Select;

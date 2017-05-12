@@ -1,7 +1,8 @@
 @import 'config';
 
-.container {
+.select {
   @include centered;
+
   position: relative;
   min-height: $height;
   background-color: $container-bg;
@@ -9,27 +10,49 @@
   font-size: $font-size;
   box-sizing: border-box;
 
+  &.disabled {
+    &::before {
+      content: '';
+      position: absolute;
+      background: #fff;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.7;
+      z-index: 1;
+    }
+  }
+
   &.isFocused {
+    background-color: $container-bg--focused;
     border-color: $border-color--focused;
+
+    .tag {
+      background-color: $tag-bg--focused;
+    }
   }
 
   &.hasError {
-    border-color: $border-color--has-error
+    border-color: $border-color--has-error;
   }
 }
 
 .value {
   @include centered;
-  padding: $padding;
+
+  padding: 0 10px;
+  color: $value-color;
 }
 
 .placeholder {
-  color: $placeholder-color;
+  opacity: 0.5;
 }
 
 .input {
   width: 100%;
-  padding: $padding;
+  min-height: 28px;
+  padding: 0 10px;
   background-color: transparent;
   border: none;
 
@@ -42,27 +65,29 @@
   width: inherit;
   max-height: $options-max-height;
   position: absolute;
-  top: 100%;
+  top: calc(100% + #{$options-space});
   left: -1px; // I don't like that
-  background: $options-bg-color;
-  border: 1px solid $border-color--default;
+  background-color: $options-bg-color;
+  border: 1px solid $options-border-color;
   overflow-y: auto;
-  z-index: 1;
+  z-index: 11;
 
   &.top {
     top: auto;
-    bottom: 100%;
+    bottom: calc(100% + #{$options-space});
   }
 }
 
 .option {
   @include centered;
-  padding: 7px $padding; // I don't like that
+
+  padding: 7px 10px;
+  color: $option-color;
   box-sizing: border-box;
   cursor: pointer;
 
   &:hover {
-    background-color: $option-bg-color;
+    background-color: $option-bg--hover;
   }
 }
 
@@ -72,9 +97,9 @@
   flex-wrap: wrap;
 
   .input {
-    min-width: 100px;
+    min-width: 50px;
     flex: 1;
-    margin-left: 2px;
+    //margin-left: 2px;
   }
 
   .value {
@@ -87,7 +112,7 @@
   align-items: center;
   margin: $tag-margin;
   padding: 0 $padding;
-  background-color: $tag-bg-color;
+  background-color: $tab-bg;
   cursor: pointer;
 }
 
@@ -126,12 +151,17 @@
     background-color: $cross-color;
   }
 
-  &:before {
+  &::before {
     transform: rotate(45deg);
   }
-  &:after {
+
+  &::after {
     transform: rotate(-45deg);
   }
+}
+
+.error {
+  color: $error-color;
 }
 
 .hidden {

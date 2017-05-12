@@ -55,11 +55,9 @@ class Examples extends React.Component {
         <li>
           <h3>Themed</h3>
           <Select
-            theme={theme}
             options={OPTIONS}
-            autocomplete
-            multi
             onChange={() => {}}
+            emptyOption
           />
         </li>
       </ul>
