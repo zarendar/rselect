@@ -21,9 +21,9 @@ class BaseSelect extends React.Component {
       value: props.value
     };
 
-    this.setFocusState = this.setFocusState.bind(this);
     this.getValue = this.getValue.bind(this);
     this.setValue = this.setValue.bind(this);
+    this.setFocusState = this.setFocusState.bind(this);
     this.filterOptions = this.filterOptions.bind(this);
     this.toggleFocusState = this.toggleFocusState.bind(this);
     this.subscribeOnClickOutside = this.subscribeOnClickOutside.bind(this);
@@ -31,6 +31,7 @@ class BaseSelect extends React.Component {
     this.clickOutside = this.clickOutside.bind(this);
     this.renderValue = this.renderValue.bind(this);
     this.renderOptions = this.renderOptions.bind(this);
+    this.renderArrow = this.renderArrow.bind(this);
   }
 
   /**
@@ -50,9 +51,7 @@ class BaseSelect extends React.Component {
   * @returns {void}
   */
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      value: nextProps.value
-    });
+    this.setState({ value: nextProps.value });
   }
 
   /**
@@ -229,6 +228,43 @@ class BaseSelect extends React.Component {
   }
 
   /**
+   * Render the arrow
+   *
+   * @returns {XML} Markup for the input
+   */
+  renderArrow() {
+    const { isFocused } = this.props;
+    const { theme } = this.props;
+    return (
+      <div
+        className={cx(theme.arrowContainer)}
+        onClick={this.toggleFocusState}
+      >
+        <i className={cx(theme.arrow, { [theme.up]: isFocused })} />
+      </div>
+    );
+  }
+
+  /**
+   * Render the content
+   *
+   * @returns {XML} Markup for the input
+   */
+  renderContent() {
+    const { theme } = this.props;
+
+    return (
+      <div
+        className={cx(theme.selectContent)}
+      >
+        {this.renderValue()}
+        {this.renderArrow()}
+        {this.renderOptions()}
+      </div>
+    );
+  }
+
+  /**
    * Render the component
    *
    * @returns {XML} Markup for the component
@@ -249,14 +285,7 @@ class BaseSelect extends React.Component {
             [theme.hasError]: error
           })}
         >
-          {this.renderValue()}
-          {this.renderOptions()}
-          <div
-            className={cx(theme.arrowContainer)}
-            onClick={this.toggleFocusState}
-          >
-            <i className={cx(theme.arrow, { [theme.up]: isFocused })} />
-          </div>
+          {this.renderContent()}
         </div>
         {error && <div className={theme.error}>{error}</div>}
       </div>
@@ -293,6 +322,7 @@ BaseSelect.propTypes = {
     options: React.PropTypes.string,
     option: React.PropTypes.string,
     placeholder: React.PropTypes.string,
+    selectContent: React.PropTypes.string,
     tag: React.PropTypes.string,
     tags: React.PropTypes.string,
     value: React.PropTypes.string

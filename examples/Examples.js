@@ -1,5 +1,8 @@
 import React from 'react';
-import ThemedSelect from '../lib/';
+import {
+  ThemedBaseSelect,
+  ThemedAutoCompleteSelect
+} from '../lib/';
 import {
   OPTIONS
 } from '../lib/__tests__/data.test';
@@ -20,7 +23,15 @@ class Examples extends React.Component {
       <ul>
         <li>
           <h3>Base</h3>
-          <ThemedSelect
+          <ThemedBaseSelect
+            emptyOption
+            options={OPTIONS}
+            onChange={() => {}}
+          />
+        </li>
+        <li>
+          <h3>Autocomplete</h3>
+          <ThemedAutoCompleteSelect
             emptyOption
             options={OPTIONS}
             onChange={() => {}}
