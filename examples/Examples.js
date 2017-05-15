@@ -1,7 +1,8 @@
 import React from 'react';
 import {
   ThemedBaseSelect,
-  ThemedAutoCompleteSelect
+  ThemedAutoCompleteSelect,
+  ThemedMultiSelect
 } from '../lib/';
 import {
   OPTIONS
@@ -33,6 +34,13 @@ class Examples extends React.Component {
           <h3>Autocomplete</h3>
           <ThemedAutoCompleteSelect
             emptyOption
+            options={OPTIONS}
+            onChange={() => {}}
+          />
+        </li>
+        <li>
+          <h3>Multi</h3>
+          <ThemedMultiSelect
             options={OPTIONS}
             onChange={() => {}}
           />

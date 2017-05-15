@@ -143,7 +143,7 @@ class BaseSelect extends React.Component {
     let node = e.target;
     while (node !== null) {
       if (node.hasAttribute &&
-        node.hasAttribute('data-state') && !!node.getAttribute('data-state')) {
+        node.hasAttribute('data-close') && !!node.getAttribute('data-close')) {
         return true;
       }
 
@@ -190,9 +190,11 @@ class BaseSelect extends React.Component {
   /**
    * Render the options
    *
+   @param {Boolean} closeAfterClick - the flag for close options by click
+   *
    * @returns {Array} The array of options
    */
-  renderOptions() {
+  renderOptions(closeAfterClick) {
     const { theme, direction, emptyOption, noDataMessage, placeholder } = this.props;
     const { isFocused, value } = this.state;
     const options = this.filterOptions(value);
@@ -215,6 +217,7 @@ class BaseSelect extends React.Component {
         {options.length
           ? options.map(option => (
             <div
+              data-close={closeAfterClick}
               key={option.id}
               className={theme.option}
               onClick={() => this.setValue(option.id)}
