@@ -1,9 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
 
-const PLACEHOLDER_DEFAULT = 'Placeholder';
-const NO_DATA_MESSAGE = 'No data';
-
 /**
  * Class represents Select component
  *
@@ -31,7 +28,7 @@ class Select extends React.Component {
     this.getValue = this.getValue.bind(this);
     this.setValue = this.setValue.bind(this);
     this.setValues = this.setValues.bind(this);
-    this.filteredByQuery = this.filteredByQuery.bind(this);
+    this.filterByQuery = this.filterByQuery.bind(this);
     this.filterOptions = this.filterOptions.bind(this);
     this.filterOptionsForMulti = this.filterOptionsForMulti.bind(this);
     this.toggleFocusState = this.toggleFocusState.bind(this);
@@ -99,13 +96,15 @@ class Select extends React.Component {
   * @returns {void}
   */
   setValue(value) {
+    const { autocomplete, name, onChange } = this.props;
+
     this.setState({ value }, () => {
-      if (this.props.autocomplete) {
+      if (autocomplete) {
         this.setQuery(this.getValue());
       }
 
       this.toggleFocusState();
-      this.props.onChange(value);
+      onChange(value, name);
     });
   }
 
@@ -117,15 +116,13 @@ class Select extends React.Component {
   * @returns {void}
   */
   setValues(value) {
-    let values;
+    const { name, onChange } = this.props;
+    const { values } = this.state;
+    const newValues = values.includes(value)
+      ? values.filter(id => id !== value)
+      : [...values, value];
 
-    if (this.state.values.includes(value)) {
-      values = this.state.values.filter(id => id !== value);
-    } else {
-      values = [...this.state.values, value];
-    }
-
-    this.setState({ values }, () => this.props.onChange(values));
+    this.setState({ values: newValues }, () => onChange(newValues, name));
   }
 
   /**
@@ -173,7 +170,7 @@ class Select extends React.Component {
   *
   * @param {Object} e - Event object by click outside
   *
-  * @returns {void}
+  * @returns {Boolean}  - return flag for click outside
   */
   clickOutside(e) {
     let node = e.target;
@@ -181,7 +178,7 @@ class Select extends React.Component {
       if (node.hasAttribute &&
         node.hasAttribute('data-state') && !!node.getAttribute('data-state')) {
         return true;
-      } // TODO I don't line this
+      }
 
       if (node === this.container) {
         return true;
@@ -199,10 +196,11 @@ class Select extends React.Component {
   *
   * @returns {Array} -The array filtered by query
   */
-  filteredByQuery(options) {
+  filterByQuery(options) {
+    const query = JSON.parse(JSON.stringify(this.state.query)).toLowerCase();
+
     return options.filter((option) => {
       const name = JSON.parse(JSON.stringify(option.name)).toLowerCase();
-      const query = JSON.parse(JSON.stringify(this.state.query)).toLowerCase();
       return name.includes(query);
     });
   }
@@ -215,15 +213,11 @@ class Select extends React.Component {
   * @returns {Array} -The filtered array of options
   */
   filterOptions(id) {
-    let filteredOptions;
     const { autocomplete, options } = this.props;
-    if (autocomplete) {
-      filteredOptions = this.filteredByQuery(options);
-    } else {
-      filteredOptions = options.filter(option => option.id !== id);
-    }
 
-    return filteredOptions;
+    return autocomplete
+      ? this.filterByQuery(options)
+      : options.filter(option => option.id !== id);
   }
 
   /**
@@ -234,19 +228,13 @@ class Select extends React.Component {
   * @returns {Array} -The filtered array of options
   */
   filterOptionsForMulti(ids) {
-    let filteredOptions;
     const { autocomplete, options } = this.props;
     const { values } = this.state;
+    const filterByQuery = this.filterByQuery(options);
 
-    if (autocomplete) {
-      const filteredByQuery = this.filteredByQuery(options);
-      filteredOptions = filteredByQuery.filter(option => !values.includes(option.id));
-    } else {
-      filteredOptions = options.filter(option =>
-        !ids.includes(option.id));
-    }
-
-    return filteredOptions;
+    return autocomplete
+      ? filterByQuery.filter(option => !values.includes(option.id))
+      : options.filter(option => !ids.includes(option.id));
   }
 
   /**
@@ -311,13 +299,9 @@ class Select extends React.Component {
   renderOptions() {
     const { theme, direction, emptyOption, noDataMessage, multi, placeholder } = this.props;
     const { isFocused, value, values } = this.state;
-    let options;
-
-    if (multi) {
-      options = this.filterOptionsForMulti(values);
-    } else {
-      options = this.filterOptions(value);
-    }
+    const options = multi
+      ? this.filterOptionsForMulti(values)
+      : this.filterOptions(value);
 
     return (
       <div
@@ -408,13 +392,12 @@ class Select extends React.Component {
           {!multi && this.renderInput()}
           {this.renderOptions()}
           {multi && this.renderTags()}
-          <i
-            className={cx(theme.arrow, {
-              [theme.up]: isFocused,
-              [theme.hidden]: values.length
-            })}
+          <div
+            className={cx(theme.arrowContainer, { [theme.hidden]: values.length })}
             onClick={this.toggleFocusState}
-          />
+          >
+            <i className={cx(theme.arrow, { [theme.up]: isFocused })} />
+          </div>
         </div>
         {error && <div className={theme.error}>{error}</div>}
       </div>
@@ -432,6 +415,7 @@ class Select extends React.Component {
  * @prop {Boolean} propTypes.isFocused - The flag for focused state
  * @prop {Boolean} propTypes.error - The flag for detecte an error
  * @prop {String} propTypes.noDataMessage - The text when data is empty
+ * @prop {Boolean} propTypes.name - The name of select
  * @prop {Boolean} propTypes.multi - The flag for muti select
  * @prop {Array} propTypes.options - The data for options
  * @prop {String} propTypes.placeholder - The placeholder text
@@ -464,7 +448,9 @@ Select.propTypes = {
   emptyOption: React.PropTypes.bool,
   isFocused: React.PropTypes.bool,
   error: React.PropTypes.string,
+  name: React.PropTypes.string,
   noDataMessage: React.PropTypes.string,
+  multi: React.PropTypes.bool,
   options: React.PropTypes.arrayOf(React.PropTypes.shape({
     id: React.PropTypes.oneOfType([
       React.PropTypes.number,
@@ -473,7 +459,6 @@ Select.propTypes = {
     name: React.PropTypes.string
   })),
   placeholder: React.PropTypes.string,
-  multi: React.PropTypes.bool,
   query: React.PropTypes.string,
   value: React.PropTypes.string,
   values: React.PropTypes.arrayOf(React.PropTypes.string),
@@ -491,10 +476,11 @@ Select.defaultProps = {
   emptyOption: false,
   isFocused: false,
   error: null,
-  noDataMessage: NO_DATA_MESSAGE,
+  noDataMessage: 'No data',
+  name: null,
   multi: false,
   options: [],
-  placeholder: PLACEHOLDER_DEFAULT,
+  placeholder: '<not set>',
   query: '',
   value: null,
   values: []
