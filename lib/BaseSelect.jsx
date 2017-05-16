@@ -257,9 +257,7 @@ class BaseSelect extends React.Component {
     const { theme } = this.props;
 
     return (
-      <div
-        className={cx(theme.selectContent)}
-      >
+      <div className={theme.selectContent} >
         {this.renderValue()}
         {this.renderArrow()}
         {this.renderOptions()}

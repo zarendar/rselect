@@ -35,9 +35,7 @@ class MultiSelect extends AutoCompleteSelect {
   * @returns {void}
   */
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      values: nextProps.values || []
-    });
+    this.setState({ values: nextProps.values || [] });
   }
 
   /**
@@ -80,9 +78,7 @@ class MultiSelect extends AutoCompleteSelect {
     const { values } = this.state;
 
     return (
-      <div
-        className={theme.tags}
-      >
+      <div className={theme.tags} >
         {values.map(id => (
           <div
             data-close
@@ -108,9 +104,7 @@ class MultiSelect extends AutoCompleteSelect {
     const { values } = this.state;
 
     return (
-      <div
-        className={cx(theme.selectContent)}
-      >
+      <div className={theme.selectContent}>
         {this.renderTags()}
         {this.renderOptions(true)}
         {!values.length && this.renderArrow()}
@@ -122,7 +116,6 @@ class MultiSelect extends AutoCompleteSelect {
 /**
  * @prop {Object} propTypes - Properties of the component
  * @prop {Boolean} propTypes.name - The name of select
- * @prop {Array} propTypes.options - The data for options
  * @prop {String} propTypes.placeholder - The placeholder text
  * @prop {String} propTypes.query - The query for filtering
  * @prop {Array} propTypes.value - The values of select
@@ -131,13 +124,6 @@ class MultiSelect extends AutoCompleteSelect {
 MultiSelect.propTypes = {
   name: React.PropTypes.string,
   noDataMessage: React.PropTypes.string,
-  options: React.PropTypes.arrayOf(React.PropTypes.shape({
-    id: React.PropTypes.oneOfType([
-      React.PropTypes.number,
-      React.PropTypes.string
-    ]),
-    name: React.PropTypes.string
-  })),
   placeholder: React.PropTypes.string,
   query: React.PropTypes.string,
   values: React.PropTypes.arrayOf(React.PropTypes.string),

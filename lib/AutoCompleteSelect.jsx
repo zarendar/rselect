@@ -1,5 +1,4 @@
 import React from 'react';
-import cx from 'classnames';
 import BaseSelect from './BaseSelect';
 
 /**
@@ -18,8 +17,7 @@ class AutoCompleteSelect extends BaseSelect {
     super(props);
 
     this.state = {
-      query: props.value ? this.getValue(props.value) : props.query,
-      value: props.value
+      query: props.value ? this.getValue(props.value) : props.query
     };
 
     this.setQuery = this.setQuery.bind(this);
@@ -120,9 +118,7 @@ class AutoCompleteSelect extends BaseSelect {
     const { theme } = this.props;
 
     return (
-      <div
-        className={cx(theme.selectContent)}
-      >
+      <div className={theme.selectContent} >
         {this.renderInput()}
         {this.renderOptions()}
         {this.renderArrow()}
@@ -134,7 +130,6 @@ class AutoCompleteSelect extends BaseSelect {
 /**
  * @prop {Object} propTypes - Properties of the component
  * @prop {Boolean} propTypes.name - The name of select
- * @prop {Array} propTypes.options - The data for options
  * @prop {String} propTypes.placeholder - The placeholder text
  * @prop {String} propTypes.query - The query for filtering
  * @prop {String} propTypes.value - The value of select
@@ -142,13 +137,6 @@ class AutoCompleteSelect extends BaseSelect {
  */
 AutoCompleteSelect.propTypes = {
   name: React.PropTypes.string,
-  options: React.PropTypes.arrayOf(React.PropTypes.shape({
-    id: React.PropTypes.oneOfType([
-      React.PropTypes.number,
-      React.PropTypes.string
-    ]),
-    name: React.PropTypes.string
-  })),
   placeholder: React.PropTypes.string,
   query: React.PropTypes.string,
   value: React.PropTypes.string,
