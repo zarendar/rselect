@@ -17,7 +17,7 @@ class AutoCompleteSelect extends BaseSelect {
     super(props);
 
     this.state = {
-      query: props.value ? this.getValue(props.value) : props.query
+      query: props.value ? this.getName(props.value) : props.query
     };
 
     this.setQuery = this.setQuery.bind(this);
@@ -38,8 +38,8 @@ class AutoCompleteSelect extends BaseSelect {
     const { name, onChange } = this.props;
 
     this.setState({ value }, () => {
-      this.setQuery(this.getValue());
-      this.toggleFocusState();
+      this.setQuery(this.getName());
+      this.toggleFocusSelect();
       onChange(value, name);
     });
   }
@@ -76,8 +76,6 @@ class AutoCompleteSelect extends BaseSelect {
   /**
   * Filter options
   *
-  * @param {String} id - The filtering identificator
-  *
   * @returns {Array} -The filtered array of options
   */
   filterOptions() {
@@ -104,7 +102,7 @@ class AutoCompleteSelect extends BaseSelect {
         placeholder={placeholder}
         value={query}
         onChange={e => this.setQuery(e.target.value)}
-        onFocus={() => this.setFocusState(true)}
+        onFocus={() => this.focusSelect()}
       />
     );
   }
@@ -129,6 +127,7 @@ class AutoCompleteSelect extends BaseSelect {
 
 /**
  * @prop {Object} propTypes - Properties of the component
+ * @prop {Object} propTypes.theme - The styles theme
  * @prop {Boolean} propTypes.name - The name of select
  * @prop {String} propTypes.placeholder - The placeholder text
  * @prop {String} propTypes.query - The query for filtering
@@ -136,24 +135,15 @@ class AutoCompleteSelect extends BaseSelect {
  * @prop {Function} propTypes.onChange - The on change component handler
  */
 AutoCompleteSelect.propTypes = {
+  theme: React.PropTypes.shape({
+    input: React.PropTypes.string,
+    selectContent: React.PropTypes.string
+  }).isRequired,
   name: React.PropTypes.string,
   placeholder: React.PropTypes.string,
   query: React.PropTypes.string,
   value: React.PropTypes.string,
   onChange: React.PropTypes.func.isRequired
-};
-
-/**
- * @prop {Object} defaultProps - Default Properties of the component
- * @see AutoCompleteSelect.propTypes
- */
-AutoCompleteSelect.defaultProps = {
-  noDataMessage: 'No data',
-  name: null,
-  options: [],
-  placeholder: '<not set>',
-  query: '',
-  value: null
 };
 
 export default AutoCompleteSelect;

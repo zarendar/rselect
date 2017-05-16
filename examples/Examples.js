@@ -40,7 +40,7 @@ class Examples extends React.Component {
           <Select
             multi
             options={OPTIONS}
-            onChange={() => {}}
+            onChange={value => console.log(value)}
           />
         </li>
       </ul>

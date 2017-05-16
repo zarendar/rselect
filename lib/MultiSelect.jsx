@@ -1,5 +1,4 @@
 import React from 'react';
-import cx from 'classnames';
 import AutoCompleteSelect from './AutoCompleteSelect';
 
 /**
@@ -18,7 +17,7 @@ class MultiSelect extends AutoCompleteSelect {
     super(props);
 
     this.state = {
-      query: props.value ? this.getValue(props.value) : props.query,
+      query: props.value ? this.getName(props.value) : props.query,
       values: props.values || []
     };
 
@@ -63,9 +62,9 @@ class MultiSelect extends AutoCompleteSelect {
   filterOptions() {
     const { options } = this.props;
     const { values } = this.state;
-    const filterByQuery = this.filterByQuery(options);
+    const filteredByQuery = this.filterByQuery(options);
 
-    return filterByQuery.filter(option => !values.includes(option.id));
+    return filteredByQuery.filter(option => !values.includes(option.id));
   }
 
   /**
@@ -85,7 +84,7 @@ class MultiSelect extends AutoCompleteSelect {
             key={`tag-${id}`}
             className={theme.tag}
           >
-            <span className={theme.tagText}>{this.getValue(id)}</span>
+            <span className={theme.tagText}>{this.getName(id)}</span>
             <i className={theme.cross} onClick={() => this.setValue(id)} />
           </div>
         ))}
@@ -115,32 +114,21 @@ class MultiSelect extends AutoCompleteSelect {
 
 /**
  * @prop {Object} propTypes - Properties of the component
+ * @prop {Object} propTypes.theme - The styles theme
  * @prop {Boolean} propTypes.name - The name of select
- * @prop {String} propTypes.placeholder - The placeholder text
  * @prop {String} propTypes.query - The query for filtering
- * @prop {Array} propTypes.value - The values of select
+ * @prop {Array} propTypes.values - The values of select
  * @prop {Function} propTypes.onChange - The on change component handler
  */
 MultiSelect.propTypes = {
+  theme: React.PropTypes.shape({
+    cross: React.PropTypes.string,
+    selectContent: React.PropTypes.string
+  }).isRequired,
   name: React.PropTypes.string,
-  noDataMessage: React.PropTypes.string,
-  placeholder: React.PropTypes.string,
   query: React.PropTypes.string,
   values: React.PropTypes.arrayOf(React.PropTypes.string),
   onChange: React.PropTypes.func.isRequired
-};
-
-/**
- * @prop {Object} defaultProps - Default Properties of the component
- * @see MultiSelect.propTypes
- */
-MultiSelect.defaultProps = {
-  noDataMessage: 'No data',
-  name: null,
-  options: [],
-  placeholder: '<not set>',
-  query: '',
-  values: []
 };
 
 export default MultiSelect;

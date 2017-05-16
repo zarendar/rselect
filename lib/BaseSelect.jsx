@@ -21,11 +21,12 @@ class BaseSelect extends React.Component {
       value: props.value
     };
 
-    this.getValue = this.getValue.bind(this);
+    this.getName = this.getName.bind(this);
     this.setValue = this.setValue.bind(this);
-    this.setFocusState = this.setFocusState.bind(this);
     this.filterOptions = this.filterOptions.bind(this);
-    this.toggleFocusState = this.toggleFocusState.bind(this);
+    this.focusSelect = this.focusSelect.bind(this);
+    this.unFocusSelect = this.unFocusSelect.bind(this);
+    this.toggleFocusSelect = this.toggleFocusSelect.bind(this);
     this.subscribeOnClickOutside = this.subscribeOnClickOutside.bind(this);
     this.unsubscribeOnClickOutside = this.unsubscribeOnClickOutside.bind(this);
     this.clickOutside = this.clickOutside.bind(this);
@@ -70,7 +71,7 @@ class BaseSelect extends React.Component {
   *
   * @returns {String} - The found name
   */
-  getValue(value) {
+  getName(value) {
     const id = value || this.state.value;
     const { options } = this.props;
     const option = options.find(item => item.id === id);
@@ -89,20 +90,27 @@ class BaseSelect extends React.Component {
     const { name, onChange } = this.props;
 
     this.setState({ value }, () => {
-      this.toggleFocusState();
+      this.toggleFocusSelect();
       onChange(value, name);
     });
   }
 
   /**
-  * Set isFocused state
-  *
-  * @param {Boolean} isFocused - The flag for isFocused state
+  * Set isFocused state to true
   *
   * @returns {void}
   */
-  setFocusState(isFocused) {
-    this.setState({ isFocused });
+  focusSelect() {
+    this.setState({ isFocused: true });
+  }
+
+  /**
+  * Set isFocused state to false
+  *
+  * @returns {void}
+  */
+  unFocusSelect() {
+    this.setState({ isFocused: false });
   }
 
   /**
@@ -110,7 +118,7 @@ class BaseSelect extends React.Component {
   *
   * @returns {void}
   */
-  toggleFocusState() {
+  toggleFocusSelect() {
     this.setState({ isFocused: !this.state.isFocused });
   }
 
@@ -142,8 +150,7 @@ class BaseSelect extends React.Component {
   clickOutside(e) {
     let node = e.target;
     while (node !== null) {
-      if (node.hasAttribute &&
-        node.hasAttribute('data-close') && !!node.getAttribute('data-close')) {
+      if (node.getAttribute && !!node.getAttribute('data-close')) {
         return true;
       }
 
@@ -152,7 +159,7 @@ class BaseSelect extends React.Component {
       }
       node = node.parentNode;
     }
-    this.setFocusState(false);
+    this.unFocusSelect();
     return false;
   }
 
@@ -180,9 +187,27 @@ class BaseSelect extends React.Component {
     return (
       <div
         className={cx(theme.value, { [theme.placeholder]: !value })}
-        onClick={this.toggleFocusState}
+        onClick={this.toggleFocusSelect}
       >
-        {value ? this.getValue() : placeholder}
+        {value ? this.getName() : placeholder}
+      </div>
+    );
+  }
+
+  /**
+   * Render the empty option
+   *
+   * @returns {XML} The markup for empty option
+   */
+  renderEmptyOption() {
+    const { theme, placeholder } = this.props;
+
+    return (
+      <div
+        className={cx(theme.option, theme.placeholder)}
+        onClick={() => this.setValue(null)}
+      >
+        {placeholder}
       </div>
     );
   }
@@ -190,12 +215,12 @@ class BaseSelect extends React.Component {
   /**
    * Render the options
    *
-   @param {Boolean} closeAfterClick - the flag for close options by click
+   * @param {Boolean} closeAfterClick - the flag for close options by click
    *
    * @returns {Array} The array of options
    */
   renderOptions(closeAfterClick) {
-    const { theme, direction, emptyOption, noDataMessage, placeholder } = this.props;
+    const { theme, direction, emptyOption, noDataMessage } = this.props;
     const { isFocused, value } = this.state;
     const options = this.filterOptions(value);
 
@@ -206,14 +231,7 @@ class BaseSelect extends React.Component {
           [theme.top]: direction === 'top'
         })}
       >
-        {emptyOption && value && (
-          <div
-            className={cx(theme.option, theme.placeholder)}
-            onClick={() => this.setValue(null)}
-          >
-            {placeholder}
-          </div>
-        )}
+        {emptyOption && value && this.renderEmptyOption()}
         {options.length
           ? options.map(option => (
             <div
@@ -236,12 +254,13 @@ class BaseSelect extends React.Component {
    * @returns {XML} Markup for the input
    */
   renderArrow() {
-    const { isFocused } = this.props;
     const { theme } = this.props;
+    const { isFocused } = this.state;
+
     return (
       <div
         className={cx(theme.arrowContainer)}
-        onClick={this.toggleFocusState}
+        onClick={this.toggleFocusSelect}
       >
         <i className={cx(theme.arrow, { [theme.up]: isFocused })} />
       </div>
@@ -312,20 +331,16 @@ class BaseSelect extends React.Component {
 BaseSelect.propTypes = {
   theme: React.PropTypes.shape({
     arrow: React.PropTypes.string,
-    cross: React.PropTypes.string,
     container: React.PropTypes.string,
     disabled: React.PropTypes.string,
     error: React.PropTypes.string,
     isFocused: React.PropTypes.string,
     hasError: React.PropTypes.string,
     hidden: React.PropTypes.string,
-    input: React.PropTypes.string,
     options: React.PropTypes.string,
     option: React.PropTypes.string,
     placeholder: React.PropTypes.string,
     selectContent: React.PropTypes.string,
-    tag: React.PropTypes.string,
-    tags: React.PropTypes.string,
     value: React.PropTypes.string
   }).isRequired,
   direction: React.PropTypes.oneOf(['top', 'bottom']),
@@ -345,23 +360,6 @@ BaseSelect.propTypes = {
   placeholder: React.PropTypes.string,
   value: React.PropTypes.string,
   onChange: React.PropTypes.func.isRequired
-};
-
-/**
- * @prop {Object} defaultProps - Default Properties of the component
- * @see BaseSelect.propTypes
- */
-BaseSelect.defaultProps = {
-  direction: 'bottom',
-  disabled: false,
-  emptyOption: false,
-  isFocused: false,
-  error: null,
-  noDataMessage: 'No data',
-  name: null,
-  options: [],
-  placeholder: '<not set>',
-  value: null
 };
 
 export default BaseSelect;
