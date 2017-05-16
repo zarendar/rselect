@@ -1,9 +1,8 @@
 import React from 'react';
-import Select from '../lib/';
+import Select from '../lib';
 import {
   OPTIONS
 } from '../lib/__tests__/data.test';
-import theme from './theme.scss';
 
 /**
  * Class represents Examples component
@@ -20,8 +19,9 @@ class Examples extends React.Component {
     return (
       <ul>
         <li>
-          <h3>Default</h3>
+          <h3>Base</h3>
           <Select
+            emptyOption
             options={OPTIONS}
             onChange={() => {}}
           />
@@ -29,37 +29,18 @@ class Examples extends React.Component {
         <li>
           <h3>Autocomplete</h3>
           <Select
-            options={OPTIONS}
             autocomplete
+            emptyOption
+            options={OPTIONS}
             onChange={() => {}}
           />
         </li>
         <li>
           <h3>Multi</h3>
           <Select
-            options={OPTIONS}
             multi
-            values={['1']}
-            onChange={() => {}}
-          />
-        </li>
-        <li>
-          <h3>Autocomplete in Multi</h3>
-          <Select
             options={OPTIONS}
-            multi
-            autocomplete
-            onChange={() => {}}
-          />
-        </li>
-        <li>
-          <h3>Themed</h3>
-          <Select
-            theme={theme}
-            options={OPTIONS}
-            autocomplete
-            multi
-            onChange={() => {}}
+            onChange={value => console.log(value)}
           />
         </li>
       </ul>
