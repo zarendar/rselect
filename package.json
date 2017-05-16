@@ -1,6 +1,6 @@
 {
   "name": "rselect",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Simple select component for React",
   "main": "dist/bundle.js",
   "scripts": {
