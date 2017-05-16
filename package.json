@@ -6,6 +6,7 @@
   "scripts": {
     "lint": "eslint lib/",
     "start": "webpack-dev-server --inline --hot --progress --colors",
+    "build": "./node_modules/.bin/webpack",
     "test": "mocha --require test-setup.js --compilers js:babel-register lib/**/*.test.js"
   },
   "repository": "git+https://github.com/zarendar/rselect.git",
