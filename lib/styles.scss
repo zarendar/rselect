@@ -1,8 +1,6 @@
 @import 'config';
 
 .select {
-  @include centered;
-
   position: relative;
   min-height: $height;
   background-color: $select-bg;
@@ -36,6 +34,10 @@
   &.hasError {
     border-color: $select-border-color--has-error;
   }
+}
+
+.selectContent {
+  @include centered;
 }
 
 .value {
