@@ -85,7 +85,7 @@ class MultiSelect extends AutoCompleteSelect {
       >
         {values.map(id => (
           <div
-            data-state
+            data-close
             key={`tag-${id}`}
             className={theme.tag}
           >
