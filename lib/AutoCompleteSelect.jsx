@@ -52,8 +52,10 @@ class AutoCompleteSelect extends BaseSelect {
   * @returns {void}
   */
   setQuery(query) {
+    const { onQueryChange } = this.props;
     this.setState({ query }, () => {
       if (!query) this.setState({ value: null });
+      onQueryChange(query);
     });
   }
 
@@ -143,7 +145,8 @@ AutoCompleteSelect.propTypes = {
   placeholder: React.PropTypes.string,
   query: React.PropTypes.string,
   value: React.PropTypes.string,
-  onChange: React.PropTypes.func.isRequired
+  onChange: React.PropTypes.func.isRequired,
+  onQueryChange: React.PropTypes.func.isRequired
 };
 
 export default AutoCompleteSelect;

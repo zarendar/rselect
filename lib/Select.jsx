@@ -39,6 +39,7 @@ function Select(selectData) {
  * @prop {String} defaultProps.query = The query for autocomplete
  * @prop {String} defaultProps.value - The value of select
  * @prop {Array} defaultProps.values - The values of select
+ * @prop {Function} defaultProps.onQueryChange - The handler on query was changed
  */
 Select.defaultProps = {
   autocomplete: false,
@@ -54,7 +55,8 @@ Select.defaultProps = {
   placeholder: '<not set>',
   query: '',
   value: null,
-  values: []
+  values: [],
+  onQueryChange: () => {}
 };
 
 export default Select;
