@@ -60,11 +60,11 @@ class MultiSelect extends AutoCompleteSelect {
   * @returns {Array} -The filtered array of options
   */
   filterOptions() {
-    const { options } = this.props;
+    const { options, valueKey } = this.props;
     const { values } = this.state;
     const filteredByQuery = this.filterByQuery(options);
 
-    return filteredByQuery.filter(option => !values.includes(option.id));
+    return filteredByQuery.filter(option => !values.includes(option[valueKey]));
   }
 
   /**
@@ -128,6 +128,7 @@ MultiSelect.propTypes = {
   name: React.PropTypes.string,
   query: React.PropTypes.string,
   values: React.PropTypes.arrayOf(React.PropTypes.string),
+  valueKey: React.PropTypes.string.isRequired,
   onChange: React.PropTypes.func.isRequired
 };
 

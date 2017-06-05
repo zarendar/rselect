@@ -73,8 +73,8 @@ class BaseSelect extends React.Component {
   */
   getName(value) {
     const id = value || this.state.value;
-    const { options } = this.props;
-    const option = options.find(item => item.id === id);
+    const { options, valueKey } = this.props;
+    const option = options.find(item => item[valueKey] === id);
 
     return option ? option.name : '';
   }
@@ -171,8 +171,8 @@ class BaseSelect extends React.Component {
   * @returns {Array} -The filtered array of options
   */
   filterOptions(id) {
-    const { options } = this.props;
-    return options.filter(option => option.id !== id);
+    const { options, valueKey } = this.props;
+    return options.filter(option => option[valueKey] !== id);
   }
 
   /**
@@ -220,7 +220,7 @@ class BaseSelect extends React.Component {
    * @returns {Array} The array of options
    */
   renderOptions(closeAfterClick) {
-    const { theme, direction, emptyOption, noDataMessage } = this.props;
+    const { theme, direction, emptyOption, noDataMessage, valueKey } = this.props;
     const { isFocused, value } = this.state;
     const options = this.filterOptions(value);
 
@@ -236,9 +236,9 @@ class BaseSelect extends React.Component {
           ? options.map(option => (
             <div
               data-close={closeAfterClick}
-              key={option.id}
+              key={option[valueKey]}
               className={theme.option}
-              onClick={() => this.setValue(option.id)}
+              onClick={() => this.setValue(option[valueKey])}
             >
               {option.name}
             </div>
@@ -343,22 +343,23 @@ BaseSelect.propTypes = {
     selectContent: React.PropTypes.string,
     value: React.PropTypes.string
   }).isRequired,
-  direction: React.PropTypes.oneOf(['top', 'bottom']),
-  disabled: React.PropTypes.bool,
-  emptyOption: React.PropTypes.bool,
-  isFocused: React.PropTypes.bool,
-  error: React.PropTypes.string,
-  name: React.PropTypes.string,
-  noDataMessage: React.PropTypes.string,
+  direction: React.PropTypes.oneOf(['top', 'bottom']).isRequired,
+  disabled: React.PropTypes.bool.isRequired,
+  emptyOption: React.PropTypes.bool.isRequired,
+  isFocused: React.PropTypes.bool.isRequired,
+  error: React.PropTypes.string.isRequired,
+  name: React.PropTypes.string.isRequired,
+  noDataMessage: React.PropTypes.string.isRequired,
   options: React.PropTypes.arrayOf(React.PropTypes.shape({
     id: React.PropTypes.oneOfType([
       React.PropTypes.number,
       React.PropTypes.string
     ]),
     name: React.PropTypes.string
-  })),
-  placeholder: React.PropTypes.string,
-  value: React.PropTypes.string,
+  })).isRequired,
+  placeholder: React.PropTypes.string.isRequired,
+  value: React.PropTypes.string.isRequired,
+  valueKey: React.PropTypes.string.isRequired,
   onChange: React.PropTypes.func.isRequired
 };
 

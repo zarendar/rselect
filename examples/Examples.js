@@ -1,8 +1,6 @@
 import React from 'react';
-import Select from '../lib';
-import {
-  OPTIONS
-} from '../lib/__tests__/data.test';
+import Table from '../lib/Table';
+import { ITEMS } from '../lib/Table/__tests__/data.test';
 
 /**
  * Class represents Examples component
@@ -17,33 +15,13 @@ class Examples extends React.Component {
    */
   render() {
     return (
-      <ul>
-        <li>
-          <h3>Base</h3>
-          <Select
-            emptyOption
-            options={OPTIONS}
-            onChange={() => {}}
-          />
-        </li>
-        <li>
-          <h3>Autocomplete</h3>
-          <Select
-            autocomplete
-            emptyOption
-            options={OPTIONS}
-            onChange={() => {}}
-          />
-        </li>
-        <li>
-          <h3>Multi</h3>
-          <Select
-            multi
-            options={OPTIONS}
-            onChange={value => console.log(value)}
-          />
-        </li>
-      </ul>
+      <Table
+        items={ITEMS}
+        selectedItemsIds={['1']}
+        onItemAdd={() => console.log('add item')}
+        onItemSelectOrDeselect={kpi => console.log(kpi)}
+        onAllItemsSelectOrDeselect={() => console.log('selected all')}
+      />
     );
   }
 }

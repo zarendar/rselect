@@ -81,11 +81,11 @@ class AutoCompleteSelect extends BaseSelect {
   * @returns {Array} -The filtered array of options
   */
   filterOptions() {
-    const { options } = this.props;
+    const { options, valueKey } = this.props;
     const { value } = this.state;
     const filterOptions = this.filterByQuery(options);
 
-    return filterOptions.filter(option => option.id !== value);
+    return filterOptions.filter(option => option[valueKey] !== value);
   }
 
   /**
@@ -145,6 +145,7 @@ AutoCompleteSelect.propTypes = {
   placeholder: React.PropTypes.string,
   query: React.PropTypes.string,
   value: React.PropTypes.string,
+  valueKey: React.PropTypes.string,
   onChange: React.PropTypes.func.isRequired,
   onQueryChange: React.PropTypes.func.isRequired
 };

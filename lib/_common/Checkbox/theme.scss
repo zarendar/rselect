@@ -1,0 +1,45 @@
+@import '~react-toolbox/lib/colors';
+@import '~react-toolbox/lib/globals';
+@import '~react-toolbox/lib/mixins';
+@import '~react-toolbox/lib/checkbox/config';
+@import './config';
+
+.check {
+  width: 18px;
+  height: 18px;
+  background-color: $checkbox-bg;
+  border: none;
+  border-radius: 0;
+
+  &.checked {
+    background-color: $checkbox-bg;
+
+    &::after {
+      margin: auto;
+      right: 4px;
+      bottom: 2px;
+      border-color: $border-color;
+      animation: checkmark-expand 140ms ease-out forwards;
+    }
+  }
+}
+
+.input {
+  position: absolute;
+}
+
+@keyframes checkmark-expand {
+  0% {
+    top: 0.9 * $unit;
+    left: 0.6 * $unit;
+    width: 0;
+    height: 0;
+  }
+
+  100% {
+    top: -0.1 * $unit;
+    left: 0.4 * $unit;
+    width: 0.7 * $unit;
+    height: 1.2 * $unit;
+  }
+}

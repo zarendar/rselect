@@ -1,0 +1,124 @@
+@import './config';
+
+body {
+  margin: 0;
+}
+
+.tableContainer {
+  height: 100%;
+}
+
+.contentTable {
+  height: 100%;
+  max-height: calc(100% - 41px);
+}
+
+.table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+
+  &.tableWithThead {
+    tr {
+      border-bottom: 1px solid $table-border-color;
+      box-sizing: border-box;
+    }
+  }
+
+  &.tableWithTbody {
+    clear: both;
+    max-height: calc(100% - 40px);
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  td,
+  th {
+    padding: 0.8em;
+    font-family: $font-family;
+    font-size: 14px;
+    color: $table-text-color;
+    box-sizing: border-box;
+    flex: 1;
+    text-align: left;
+
+    &:nth-child(1) {
+      flex: 0;
+    }
+  }
+
+  thead,
+  tbody,
+  td {
+    display: block;
+  }
+
+  tr {
+    display: flex;
+    border-top: 1px solid $table-border-color;
+
+    &:first-child {
+      border-top: none;
+    }
+
+    &.selectedItem {
+      background-color: $tr-background-color;
+    }
+  }
+
+  th {
+    font-weight: 300;
+    border: none;
+    color: #3b73b3;
+  }
+
+  .noMatching {
+    td {
+      width: 100%;
+      text-align: center;
+      color: $no-matching-color;
+      border-bottom: 1px solid $table-border-color;
+
+      span {
+        opacity: 0.5;
+      }
+    }
+  }
+
+  tbody tr {
+    &:hover {
+      cursor: pointer;
+      background-color: $tr-background-color;
+    }
+  }
+}
+
+.field {
+  margin-bottom: 0;
+  height: auto;
+}
+
+.button {
+  &.tableButton {
+    height: 40px;
+    background: #fff;
+    border-top: 1px solid $table-border-color;
+    border-bottom: 1px solid $table-border-color;
+    color: $add-button-color;
+
+    &:hover {
+      background: #fff;
+      color: $add-button-hover-color;
+
+      .icon {
+        color: $add-button-hover-color;
+      }
+    }
+
+    .icon {
+      font-size: 18px;
+      color: $button-icon-color;
+    }
+  }
+}
