@@ -28,12 +28,12 @@ class AutoCompleteSelect extends BaseSelect {
   }
 
   /**
-  * Set new value into state
-  *
-  * @param {String} value - The new value
-  *
-  * @returns {void}
-  */
+   * Set new value into state
+   *
+   * @param {String} value - The new value
+   *
+   * @returns {void}
+   */
   setValue(value) {
     const { name, onChange } = this.props;
 
@@ -43,12 +43,12 @@ class AutoCompleteSelect extends BaseSelect {
   }
 
   /**
-  * Set query state
-  *
-  * @param {String} query - The query text
-  *
-  * @returns {void}
-  */
+   * Set query state
+   *
+   * @param {String} query - The query text
+   *
+   * @returns {void}
+   */
   setQuery(query) {
     const { onQueryChange } = this.props;
     this.setState({ query }, () => {
@@ -57,12 +57,12 @@ class AutoCompleteSelect extends BaseSelect {
   }
 
   /**
-  * Filter by query options
-  *
-  * @param {Array} options - The array of options
-  *
-  * @returns {Array} -The array filtered by query
-  */
+   * Filter by query options
+   *
+   * @param {Array} options - The array of options
+   *
+   * @returns {Array} -The array filtered by query
+   */
   filterByQuery(options) {
     const { labelKey } = this.props;
     const query = JSON.parse(JSON.stringify(this.state.query)).toLowerCase();
@@ -74,10 +74,10 @@ class AutoCompleteSelect extends BaseSelect {
   }
 
   /**
-  * Filter options
-  *
-  * @returns {Array} -The filtered array of options
-  */
+   * Filter options
+   *
+   * @returns {Array} -The filtered array of options
+   */
   filterOptions() {
     const { options, value, valueKey } = this.props;
     const filterOptions = this.filterByQuery(options);
