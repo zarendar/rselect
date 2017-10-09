@@ -4,11 +4,25 @@ import AutoCompleteSelect from './AutoCompleteSelect';
 import MultiSelect from './MultiSelect';
 
 /**
+ * The placeholder by default
+ *
+ * @type {String}
+ */
+export const DEFAULT_PLACEHOLDER = '<select>';
+
+/**
+ * The text shows when options array is empty
+ *
+ * @type {String}
+ */
+export const NO_DATA_MESSAGE = 'No data';
+
+/**
  * Function represents Select HOC component
  *
  * @param {Object} selectData - The select data
  *
- * @returns {Class} - The particular class
+ * @returns {XML} - The particular class
  */
 function Select(selectData) {
   if (selectData.multi) {
@@ -33,6 +47,7 @@ function Select(selectData) {
  * @prop {Boolean} defaultProps.error - The flag for detecte an error
  * @prop {String} defaultProps.noDataMessage - The text when data is empty
  * @prop {Boolean} defaultProps.name - The name of select
+ * @prop {String} defaultProps.labelKey - The key of label in the options
  * @prop {Boolean} defaultProps.multi - The flag for multi select
  * @prop {Array} defaultProps.options - The data for options
  * @prop {String} defaultProps.placeholder - The placeholder text
@@ -49,11 +64,12 @@ Select.defaultProps = {
   emptyOption: false,
   isFocused: false,
   error: '',
+  labelKey: 'name',
   multi: false,
-  noDataMessage: 'No data',
+  noDataMessage: NO_DATA_MESSAGE,
   name: '',
   options: [],
-  placeholder: '<not set>',
+  placeholder: DEFAULT_PLACEHOLDER,
   query: '',
   value: '',
   values: [],

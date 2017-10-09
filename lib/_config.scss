@@ -1,0 +1,30 @@
+@import './colors';
+
+$height: 30px;
+$font-size: 14px;
+$options-max-height: 215px;
+$options-space: 5px;
+$padding: 10px;
+
+$arrow-color: $black-brown;
+$cross-color: $warm-grey;
+$error-color: $persimmon;
+$options-bg-color: $pale-grey;
+$options-border-color: $white;
+$option-bg-color: $pale-grey;
+$option-bg-color--hover: $periwinkle-gray;
+$option-color: $warm-grey;
+$select-bg: $pale-grey;
+$select-bg--focused: $white;
+$select-border-color--default: transparent;
+$select-border-color--focused: $steel-blue;
+$select-border-color--has-error: $monza;
+$tab-bg: $periwinkle-gray;
+$tag-bg--focused: $pale-grey;
+$value-color: $black-brown;
+
+@mixin centered {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}

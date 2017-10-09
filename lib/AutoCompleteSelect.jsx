@@ -28,61 +28,58 @@ class AutoCompleteSelect extends BaseSelect {
   }
 
   /**
-  * Set new value into state
-  *
-  * @param {String} value - The new value
-  *
-  * @returns {void}
-  */
+   * Set new value into state
+   *
+   * @param {String} value - The new value
+   *
+   * @returns {void}
+   */
   setValue(value) {
     const { name, onChange } = this.props;
 
-    this.setState({ value }, () => {
-      this.setQuery(this.getName());
-      this.toggleFocusSelect();
-      onChange(value, name);
-    });
+    this.setState({ query: this.getName(value) });
+    this.toggleFocusSelect();
+    onChange(value, name);
   }
 
   /**
-  * Set query state
-  *
-  * @param {String} query - The query text
-  *
-  * @returns {void}
-  */
+   * Set query state
+   *
+   * @param {String} query - The query text
+   *
+   * @returns {void}
+   */
   setQuery(query) {
     const { onQueryChange } = this.props;
     this.setState({ query }, () => {
-      if (!query) this.setState({ value: null });
       onQueryChange(query);
     });
   }
 
   /**
-  * Filter by query options
-  *
-  * @param {Array} options - The array of options
-  *
-  * @returns {Array} -The array filtered by query
-  */
+   * Filter by query options
+   *
+   * @param {Array} options - The array of options
+   *
+   * @returns {Array} -The array filtered by query
+   */
   filterByQuery(options) {
+    const { labelKey } = this.props;
     const query = JSON.parse(JSON.stringify(this.state.query)).toLowerCase();
 
     return options.filter((option) => {
-      const name = JSON.parse(JSON.stringify(option.name)).toLowerCase();
+      const name = JSON.parse(JSON.stringify(option[labelKey])).toLowerCase();
       return name.includes(query);
     });
   }
 
   /**
-  * Filter options
-  *
-  * @returns {Array} -The filtered array of options
-  */
+   * Filter options
+   *
+   * @returns {Array} -The filtered array of options
+   */
   filterOptions() {
-    const { options, valueKey } = this.props;
-    const { value } = this.state;
+    const { options, value, valueKey } = this.props;
     const filterOptions = this.filterByQuery(options);
 
     return filterOptions.filter(option => option[valueKey] !== value);
@@ -103,6 +100,7 @@ class AutoCompleteSelect extends BaseSelect {
         className={theme.input}
         placeholder={placeholder}
         value={query}
+        onClick={e => e.stopPropagation()}
         onChange={e => this.setQuery(e.target.value)}
         onFocus={() => this.focusSelect()}
       />
@@ -130,6 +128,7 @@ class AutoCompleteSelect extends BaseSelect {
 /**
  * @prop {Object} propTypes - Properties of the component
  * @prop {Object} propTypes.theme - The styles theme
+ * @prop {String} propTypes.labelKey - The key of label in the oprions
  * @prop {Boolean} propTypes.name - The name of select
  * @prop {String} propTypes.placeholder - The placeholder text
  * @prop {String} propTypes.query - The query for filtering
@@ -141,6 +140,7 @@ AutoCompleteSelect.propTypes = {
     input: React.PropTypes.string,
     selectContent: React.PropTypes.string
   }).isRequired,
+  labelKey: React.PropTypes.string,
   name: React.PropTypes.string,
   placeholder: React.PropTypes.string,
   query: React.PropTypes.string,
