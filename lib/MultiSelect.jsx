@@ -17,8 +17,7 @@ class MultiSelect extends AutoCompleteSelect {
     super(props);
 
     this.state = {
-      query: props.value ? this.getName(props.value) : props.query,
-      values: props.values || []
+      query: props.value ? this.getName(props.value) : props.query
     };
 
     this.setValue = this.setValue.bind(this);
@@ -27,7 +26,7 @@ class MultiSelect extends AutoCompleteSelect {
   }
 
   /**
-  * Handler on component will recieve props
+  * Handler on component will receive props
   *
   * @param {Object} nextProps - The next properties
   *
@@ -45,13 +44,12 @@ class MultiSelect extends AutoCompleteSelect {
   * @returns {void}
   */
   setValue(value) {
-    const { name, onChange } = this.props;
-    const { values } = this.state;
+    const { name, values, onChange } = this.props;
     const newValues = values.includes(value)
       ? values.filter(id => id !== value)
       : [...values, value];
 
-    this.setState({ values: newValues }, () => onChange(newValues, name));
+    onChange(newValues, name);
   }
 
   /**
@@ -60,8 +58,7 @@ class MultiSelect extends AutoCompleteSelect {
   * @returns {Array} -The filtered array of options
   */
   filterOptions() {
-    const { options, valueKey } = this.props;
-    const { values } = this.state;
+    const { options, valueKey, values } = this.props;
     const filteredByQuery = this.filterByQuery(options);
 
     return filteredByQuery.filter(option => !values.includes(option[valueKey]));
@@ -70,14 +67,13 @@ class MultiSelect extends AutoCompleteSelect {
   /**
    * Render the tags
    *
-   * @returns {Array} The array of options
+   * @returns {XML} The array of options
    */
   renderTags() {
-    const { theme } = this.props;
-    const { values } = this.state;
+    const { theme, values } = this.props;
 
     return (
-      <div className={theme.tags} >
+      <div className={theme.tags} onClick={e => e.stopPropagation()}>
         {values.map(id => (
           <div
             data-close
@@ -85,7 +81,13 @@ class MultiSelect extends AutoCompleteSelect {
             className={theme.tag}
           >
             <span className={theme.tagText}>{this.getName(id)}</span>
-            <i className={theme.cross} onClick={() => this.setValue(id)} />
+            <i
+              className={theme.cross}
+              onClick={(e) => {
+                e.stopPropagation();
+                this.setValue(id);
+              }}
+            />
           </div>
         ))}
         {this.renderInput()}
@@ -99,8 +101,7 @@ class MultiSelect extends AutoCompleteSelect {
    * @returns {XML} Markup for the input
    */
   renderContent() {
-    const { theme } = this.props;
-    const { values } = this.state;
+    const { theme, values } = this.props;
 
     return (
       <div className={theme.selectContent}>

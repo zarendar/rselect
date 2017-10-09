@@ -17,8 +17,7 @@ class BaseSelect extends React.Component {
     super(props);
 
     this.state = {
-      isFocused: props.isFocused,
-      value: props.value
+      isFocused: props.isFocused
     };
 
     this.getName = this.getName.bind(this);
@@ -45,17 +44,6 @@ class BaseSelect extends React.Component {
   }
 
   /**
-  * Handler on component will recieve props
-  *
-  * @param {Object} nextProps - The next properties
-  *
-  * @returns {void}
-  */
-  componentWillReceiveProps(nextProps) {
-    this.setState({ value: nextProps.value });
-  }
-
-  /**
   * Handler on component will unmount
   *
   * @returns {void}
@@ -67,16 +55,16 @@ class BaseSelect extends React.Component {
   /**
   * Get name from options by id
   *
-  * @param {String} value - The identificator from properties
+  * @param {String} newValue - The identifier from properties
   *
   * @returns {String} - The found name
   */
-  getName(value) {
-    const id = value || this.state.value;
-    const { options, valueKey } = this.props;
+  getName(newValue) {
+    const { labelKey, options, value, valueKey } = this.props;
+    const id = newValue || value;
     const option = options.find(item => item[valueKey] === id);
 
-    return option ? option.name : '';
+    return option ? option[labelKey] : '';
   }
 
   /**
@@ -89,10 +77,8 @@ class BaseSelect extends React.Component {
   setValue(value) {
     const { name, onChange } = this.props;
 
-    this.setState({ value }, () => {
-      this.toggleFocusSelect();
-      onChange(value, name);
-    });
+    this.toggleFocusSelect();
+    onChange(value, name);
   }
 
   /**
@@ -181,13 +167,15 @@ class BaseSelect extends React.Component {
    * @returns {XML} Markup for the input
    */
   renderValue() {
-    const { theme, placeholder } = this.props;
-    const { value } = this.state;
+    const { theme, placeholder, value } = this.props;
 
     return (
       <div
         className={cx(theme.value, { [theme.placeholder]: !value })}
-        onClick={this.toggleFocusSelect}
+        onClick={(e) => {
+          e.stopPropagation();
+          this.toggleFocusSelect();
+        }}
       >
         {value ? this.getName() : placeholder}
       </div>
@@ -205,9 +193,12 @@ class BaseSelect extends React.Component {
     return (
       <div
         className={cx(theme.option, theme.placeholder)}
-        onClick={() => this.setValue(null)}
+        onClick={(e) => {
+          e.stopPropagation();
+          this.setValue('');
+        }}
       >
-        {placeholder}
+        {placeholder || 'select'}
       </div>
     );
   }
@@ -215,13 +206,13 @@ class BaseSelect extends React.Component {
   /**
    * Render the options
    *
-   * @param {Boolean} closeAfterClick - the flag for close options by click
+   * @param {Boolean | Undefined} closeAfterClick - The flag for close options by click
    *
    * @returns {Array} The array of options
    */
   renderOptions(closeAfterClick) {
-    const { theme, direction, emptyOption, noDataMessage, valueKey } = this.props;
-    const { isFocused, value } = this.state;
+    const { theme, direction, emptyOption, labelKey, noDataMessage, value, valueKey } = this.props;
+    const { isFocused } = this.state;
     const options = this.filterOptions(value);
 
     return (
@@ -236,14 +227,17 @@ class BaseSelect extends React.Component {
           ? options.map(option => (
             <div
               data-close={closeAfterClick}
-              key={option[valueKey]}
+              key={option.id}
               className={theme.option}
-              onClick={() => this.setValue(option[valueKey])}
+              onClick={(e) => {
+                e.stopPropagation();
+                this.setValue(option[valueKey]);
+              }}
             >
-              {option.name}
+              {option[labelKey]}
             </div>
           ))
-          : <div className={theme.option}>{noDataMessage}</div>}
+          : !value && <div className={theme.option}>{noDataMessage}</div>}
       </div>
     );
   }
@@ -260,7 +254,10 @@ class BaseSelect extends React.Component {
     return (
       <div
         className={cx(theme.arrowContainer)}
-        onClick={this.toggleFocusSelect}
+        onClick={(e) => {
+          e.stopPropagation();
+          this.toggleFocusSelect();
+        }}
       >
         <i className={cx(theme.arrow, { [theme.up]: isFocused })} />
       </div>
@@ -276,7 +273,7 @@ class BaseSelect extends React.Component {
     const { theme } = this.props;
 
     return (
-      <div className={theme.selectContent} >
+      <div className={theme.selectContent} onClick={e => e.stopPropagation()}>
         {this.renderValue()}
         {this.renderArrow()}
         {this.renderOptions()}
@@ -320,6 +317,7 @@ class BaseSelect extends React.Component {
  * @prop {Boolean} propTypes.disabled - The flag for disabled
  * @prop {Boolean} propTypes.emptyOption - The flag for emptyOption
  * @prop {Boolean} propTypes.isFocused - The flag for focused state
+ * @prop {String} propTypes.labelKey - The key of label in the options
  * @prop {Boolean} propTypes.error - The flag for detecte an error
  * @prop {String} propTypes.noDataMessage - The text when data is empty
  * @prop {Boolean} propTypes.name - The name of select
@@ -347,7 +345,11 @@ BaseSelect.propTypes = {
   disabled: React.PropTypes.bool.isRequired,
   emptyOption: React.PropTypes.bool.isRequired,
   isFocused: React.PropTypes.bool.isRequired,
-  error: React.PropTypes.string.isRequired,
+  error: React.PropTypes.oneOfType([
+    React.PropTypes.bool,
+    React.PropTypes.string
+  ]).isRequired,
+  labelKey: React.PropTypes.string.isRequired,
   name: React.PropTypes.string.isRequired,
   noDataMessage: React.PropTypes.string.isRequired,
   options: React.PropTypes.arrayOf(React.PropTypes.shape({
@@ -358,7 +360,10 @@ BaseSelect.propTypes = {
     name: React.PropTypes.string
   })).isRequired,
   placeholder: React.PropTypes.string.isRequired,
-  value: React.PropTypes.string.isRequired,
+  value: React.PropTypes.oneOfType([
+    React.PropTypes.number,
+    React.PropTypes.string
+  ]).isRequired,
   valueKey: React.PropTypes.string.isRequired,
   onChange: React.PropTypes.func.isRequired
 };
