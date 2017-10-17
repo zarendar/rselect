@@ -1,13 +1,13 @@
 {
   "name": "rselect",
   "version": "1.0.4",
-  "description": "Simple select component for React",
+  "description": "Simple select component built with React",
   "main": "dist/bundle.js",
   "scripts": {
-    "lint": "eslint lib/",
-    "start": "webpack-dev-server --inline --hot --progress --colors",
     "build": "./node_modules/.bin/webpack",
-    "test": "mocha --require babel-core/register test-setup.js lib/**/*.test.js"
+    "lint": "eslint src/",
+    "start": "webpack-dev-server --inline --hot --progress --colors",
+    "test": "mocha --require babel-core/register test-setup.js src/**/*.test.js"
   },
   "repository": "git+https://github.com/zarendar/rselect.git",
   "keywords": [

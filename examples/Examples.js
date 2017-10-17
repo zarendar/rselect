@@ -1,5 +1,5 @@
 import React from 'react';
-import Select from '../lib';
+import Select from '../src';
 import options from './data';
 
 
