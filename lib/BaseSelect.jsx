@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 /**
@@ -327,45 +328,45 @@ class BaseSelect extends React.Component {
  * @prop {Function} propTypes.onChange - The on change component handler
  */
 BaseSelect.propTypes = {
-  theme: React.PropTypes.shape({
-    arrow: React.PropTypes.string,
-    container: React.PropTypes.string,
-    disabled: React.PropTypes.string,
-    error: React.PropTypes.string,
-    isFocused: React.PropTypes.string,
-    hasError: React.PropTypes.string,
-    hidden: React.PropTypes.string,
-    options: React.PropTypes.string,
-    option: React.PropTypes.string,
-    placeholder: React.PropTypes.string,
-    selectContent: React.PropTypes.string,
-    value: React.PropTypes.string
+  theme: PropTypes.shape({
+    arrow: PropTypes.string,
+    container: PropTypes.string,
+    disabled: PropTypes.string,
+    error: PropTypes.string,
+    isFocused: PropTypes.string,
+    hasError: PropTypes.string,
+    hidden: PropTypes.string,
+    options: PropTypes.string,
+    option: PropTypes.string,
+    placeholder: PropTypes.string,
+    selectContent: PropTypes.string,
+    value: PropTypes.string
   }).isRequired,
-  direction: React.PropTypes.oneOf(['top', 'bottom']).isRequired,
-  disabled: React.PropTypes.bool.isRequired,
-  emptyOption: React.PropTypes.bool.isRequired,
-  isFocused: React.PropTypes.bool.isRequired,
-  error: React.PropTypes.oneOfType([
-    React.PropTypes.bool,
-    React.PropTypes.string
+  direction: PropTypes.oneOf(['top', 'bottom']).isRequired,
+  disabled: PropTypes.bool.isRequired,
+  emptyOption: PropTypes.bool.isRequired,
+  isFocused: PropTypes.bool.isRequired,
+  error: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.string
   ]).isRequired,
-  labelKey: React.PropTypes.string.isRequired,
-  name: React.PropTypes.string.isRequired,
-  noDataMessage: React.PropTypes.string.isRequired,
-  options: React.PropTypes.arrayOf(React.PropTypes.shape({
-    id: React.PropTypes.oneOfType([
-      React.PropTypes.number,
-      React.PropTypes.string
+  labelKey: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  noDataMessage: PropTypes.string.isRequired,
+  options: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string
     ]),
-    name: React.PropTypes.string
+    name: PropTypes.string
   })).isRequired,
-  placeholder: React.PropTypes.string.isRequired,
-  value: React.PropTypes.oneOfType([
-    React.PropTypes.number,
-    React.PropTypes.string
+  placeholder: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string
   ]).isRequired,
-  valueKey: React.PropTypes.string.isRequired,
-  onChange: React.PropTypes.func.isRequired
+  valueKey: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired
 };
 
 export default BaseSelect;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import BaseSelect from './BaseSelect';
 
 /**
@@ -136,18 +137,18 @@ class AutoCompleteSelect extends BaseSelect {
  * @prop {Function} propTypes.onChange - The on change component handler
  */
 AutoCompleteSelect.propTypes = {
-  theme: React.PropTypes.shape({
-    input: React.PropTypes.string,
-    selectContent: React.PropTypes.string
+  theme: PropTypes.shape({
+    input: PropTypes.string,
+    selectContent: PropTypes.string
   }).isRequired,
-  labelKey: React.PropTypes.string,
-  name: React.PropTypes.string,
-  placeholder: React.PropTypes.string,
-  query: React.PropTypes.string,
-  value: React.PropTypes.string,
-  valueKey: React.PropTypes.string,
-  onChange: React.PropTypes.func.isRequired,
-  onQueryChange: React.PropTypes.func.isRequired
+  labelKey: PropTypes.string,
+  name: PropTypes.string,
+  placeholder: PropTypes.string,
+  query: PropTypes.string,
+  value: PropTypes.string,
+  valueKey: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  onQueryChange: PropTypes.func.isRequired
 };
 
 export default AutoCompleteSelect;
