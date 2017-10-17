@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import AutoCompleteSelect from './AutoCompleteSelect';
 
 /**
@@ -122,15 +123,15 @@ class MultiSelect extends AutoCompleteSelect {
  * @prop {Function} propTypes.onChange - The on change component handler
  */
 MultiSelect.propTypes = {
-  theme: React.PropTypes.shape({
-    cross: React.PropTypes.string,
-    selectContent: React.PropTypes.string
+  theme: PropTypes.shape({
+    cross: PropTypes.string,
+    selectContent: PropTypes.string
   }).isRequired,
-  name: React.PropTypes.string,
-  query: React.PropTypes.string,
-  values: React.PropTypes.arrayOf(React.PropTypes.string),
-  valueKey: React.PropTypes.string.isRequired,
-  onChange: React.PropTypes.func.isRequired
+  name: PropTypes.string,
+  query: PropTypes.string,
+  values: PropTypes.arrayOf(PropTypes.string),
+  valueKey: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired
 };
 
 export default MultiSelect;
